@@ -1,0 +1,52 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #ffffff;
+  font-family: 'Poppins', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===== BLOCO ===== */
+.bloco {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.bloco img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== BOTÃO ===== */
+.btn {
+  position: absolute;
+  bottom: 10%;
+  background: #b65f2a;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: background 0.3s;
+}
+.btn:hover {
+  background: #924b20;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .btn {
+    padding: 12px 22px;
+    font-size: 14px;
+    bottom: 8%;
+  }
+}
