@@ -75,11 +75,12 @@ body {
 /* Responsividade: botão um pouco mais baixo no celular */
 @media (max-width: 768px) {
   .bloco-preco .btn-preco {
-    top: 28%;
+    top: 18%;
     padding: 12px 22px;
     font-size: 14px;
   }
 }
+
 
 
 
