@@ -54,7 +54,7 @@ body {
 /* ===== BLOCO 6 - AJUSTE DO BOTÃO ===== */
 .bloco-preco .btn-preco {
   bottom: auto;          /* remove o padrão que fixa o botão embaixo */
-  top: 36%;              /* controla a altura — ajuste conforme o visual */
+  top: 26%;              /* controla a altura — ajuste conforme o visual */
   left: 50%;
   transform: translateX(-50%);
   background: #b65f2a;
@@ -80,4 +80,5 @@ body {
     font-size: 14px;
   }
 }
+
 
