@@ -50,3 +50,33 @@ body {
     bottom: 8%;
   }
 }
+
+/* ===== BLOCO 6 - AJUSTE DO BOTÃO ===== */
+.bloco-preco .btn-preco {
+  bottom: auto;          /* remove o padrão que fixa o botão embaixo */
+  top: 46%;              /* controla a altura — ajuste conforme o visual */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #b65f2a;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: background 0.3s;
+  position: absolute;
+}
+
+.bloco-preco .btn-preco:hover {
+  background: #924b20;
+}
+
+/* Responsividade: botão um pouco mais baixo no celular */
+@media (max-width: 768px) {
+  .bloco-preco .btn-preco {
+    top: 48%;
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+}
