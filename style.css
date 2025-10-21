@@ -23,6 +23,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  max-width: 100%;
 }
 
 /* ===== BOTÃO ===== */
@@ -42,19 +43,10 @@ body {
   background: #924b20;
 }
 
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 768px) {
-  .btn {
-    padding: 12px 22px;
-    font-size: 14px;
-    bottom: 8%;
-  }
-}
-
 /* ===== BLOCO 6 - AJUSTE DO BOTÃO ===== */
 .bloco-preco .btn-preco {
-  bottom: auto;          /* remove o padrão que fixa o botão embaixo */
-  top: 46%;              /* controla a altura — ajuste conforme o visual */
+  bottom: auto;
+  top: 46%;
   left: 50%;
   transform: translateX(-50%);
   background: #b65f2a;
@@ -67,13 +59,17 @@ body {
   transition: background 0.3s;
   position: absolute;
 }
-
 .bloco-preco .btn-preco:hover {
   background: #924b20;
 }
 
-/* Responsividade: botão um pouco mais baixo no celular */
+/* ===== RESPONSIVIDADE - MOBILE ===== */
 @media (max-width: 768px) {
+  .btn {
+    padding: 12px 22px;
+    font-size: 14px;
+    bottom: 8%;
+  }
   .bloco-preco .btn-preco {
     top: 22%;
     padding: 12px 22px;
@@ -81,8 +77,44 @@ body {
   }
 }
 
+/* ===== RESPONSIVIDADE - DESKTOP (PC) ===== */
+@media (min-width: 1024px) {
 
+  /* Centraliza o conteúdo e limita largura das imagens */
+  .bloco {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
+  .bloco img {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  }
 
+  /* Botão mais proporcional no PC */
+  .btn {
+    font-size: 16px;
+    padding: 16px 36px;
+    bottom: 8%;
+  }
 
+  /* Botão do preço um pouco mais acima */
+  .bloco-preco .btn-preco {
+    top: 40%;
+    font-size: 16px;
+    padding: 16px 36px;
+  }
 
+  /* Melhora o contraste visual com espaçamento entre blocos */
+  .bloco + .bloco {
+    margin-top: 40px;
+  }
+
+  /* Fundo branco e centralizado no PC */
+  body {
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
