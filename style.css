@@ -55,6 +55,7 @@ body {
   z-index: 3;
   top: 75%;
   transform: translateY(-50%);
+  text-align: center;
 }
 .hero-phrase {
   font-family: 'Alex Brush', cursive;
@@ -143,9 +144,53 @@ footer a:hover { text-decoration: underline; }
 
 /* Responsivo */
 @media (max-width: 768px) {
-  .logo-floating { width: 160px; top: 12%; left: 5%; }
-  .hero { height: 75vh; }
-  .hero-phrase { font-size: 1.8rem; }
+  /* Hero - centralizar logos */
+  .hero {
+    height: 75vh;
+  }
+
+  .logo-floating {
+    width: 180px;
+    top: 24%;       /* desce um pouco a logo */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Centralizar conteúdo hero */
+  .hero-content {
+    top: 70%;
+    transform: translateY(-40%);
+    text-align: center;
+  }
+
+  .hero-phrase {
+    font-size: 1.8rem;
+  }
+
+  /* Seção Sobre - centralizar tudo */
+  #about .col-md-6 {
+    text-align: center;
+  }
+
+  #about h2,
+  #about p,
+  #about .btn {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Seção Funcionamento - centralizar título e texto */
+  #how .col-md-6 {
+    text-align: center;
+  }
+
+  #how h2,
+  #how p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   /* Ajuste da seção de compra no celular */
   .purchase-overlay {
