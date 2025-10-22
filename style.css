@@ -1,120 +1,136 @@
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --brown-dark: #3B2A1A;
+  --cream: #F7F2EA;
+  --highlight: #b3672a;
 }
+
+/* Body */
 body {
-  background-color: #ffffff;
-  font-family: 'Poppins', Arial, sans-serif;
-  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  color: #fff;
 }
 
-/* ===== BLOCO ===== */
-.bloco {
+/* Navbar */
+.custom-navbar {
+  background-color: #3E1E14 !important;
+}
+.navbar-logo {
+  height: 50px;
+  width: auto;
+}
+.nav-link {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  color: #fff !important;
+  margin-left: 1rem;
+  transition: color .2s;
+}
+.nav-link:hover {
+  color: #b3672a !important;
+}
+
+/* Hero */
+.hero {
   position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  height: 90vh;
+  overflow: hidden;
 }
-.bloco img {
+.hero-bg {
   width: 100%;
-  height: auto;
-  display: block;
-  max-width: 100%;
-}
-
-/* ===== BOTÃO ===== */
-.btn {
+  height: 100%;
+  object-fit: cover;
   position: absolute;
-  bottom: 10%;
-  background: #b65f2a;
-  color: #fff;
-  padding: 14px 30px;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  transition: background 0.3s;
+  z-index: 1;
 }
-.btn:hover {
-  background: #924b20;
+.logo-floating {
+  position: absolute;
+  top: 18%;
+  left: 8%;
+  width: 250px;
+  z-index: 2;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.3));
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  top: 75%;
+  transform: translateY(-50%);
+}
+.hero-phrase {
+  font-family: 'Alex Brush', cursive;
+  font-size: 2.6rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.btn-cta {
+  background: var(--highlight);
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.8rem 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+}
+.btn-cta:hover {
+  background: #3B2A1A;
+  color: #fff;
 }
 
-/* ===== BLOCO 6 - AJUSTE DO BOTÃO ===== */
-.bloco-preco .btn-preco {
-  bottom: auto;
-  top: 46%;
+/* Sections */
+.section-about { background-color: #4D3821; color: #fff; }
+.section-models { background-color: #B78752; color: #fff; }
+.section-testimonials { background-color: #7C5C52; color: #fff; }
+.section-footer { background-color: #BC6C25; color: #fff; }
+
+/* Titles */
+.title-section { font-weight: 700; }
+
+/* Testemunhos */
+.testimonial-card {
+  background-color: #B78752;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  color: #fff;
+}
+.testimonial-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+.name { font-weight: 700; margin-top: 0.75rem; }
+
+/* Comprar */
+.purchase-container { position: relative; }
+.purchase-overlay {
+  position: absolute;
+  top: 38%;
   left: 50%;
-  transform: translateX(-50%);
-  background: #b65f2a;
-  color: #fff;
-  padding: 14px 30px;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  transition: background 0.3s;
-  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff; /* cor padrão do overlay */
 }
-.bloco-preco .btn-preco:hover {
-  background: #924b20;
+/* Textos marrom dentro do overlay */
+.purchase-overlay .phrase-top,
+.purchase-overlay .old-price {
+  color: #3B2A1A; /* marrom escuro */
 }
 
-/* ===== RESPONSIVIDADE - MOBILE ===== */
+.phrase-top { font-weight: 700; font-size: 1.4rem; margin-bottom: 0.5rem; }
+.old-price { text-decoration: line-through; font-size: 1.3rem; margin-bottom: 0; }
+.new-price { font-size: 3.2rem; font-weight: 800; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.7); }
+
+/* Footer */
+footer a { color: #fff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Responsivo */
 @media (max-width: 768px) {
-  .btn {
-    padding: 12px 22px;
-    font-size: 14px;
-    bottom: 8%;
-  }
-  .bloco-preco .btn-preco {
-    top: 22%;
-    padding: 12px 22px;
-    font-size: 14px;
-  }
-}
-
-/* ===== RESPONSIVIDADE - DESKTOP (PC) ===== */
-@media (min-width: 1024px) {
-
-  /* Centraliza o conteúdo e limita largura das imagens */
-  .bloco {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .bloco img {
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  }
-
-  /* Botão mais proporcional no PC */
-  .btn {
-    font-size: 16px;
-    padding: 16px 36px;
-    bottom: 8%;
-  }
-
-  /* Botão do preço um pouco mais acima */
-  .bloco-preco .btn-preco {
-    top: 40%;
-    font-size: 16px;
-    padding: 16px 36px;
-  }
-
-  /* Melhora o contraste visual com espaçamento entre blocos */
-  .bloco + .bloco {
-    margin-top: 40px;
-  }
-
-  /* Fundo branco e centralizado no PC */
-  body {
-    background: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  .logo-floating { width: 160px; top: 12%; left: 5%; }
+  .hero { height: 75vh; }
+  .hero-phrase { font-size: 1.8rem; }
+  .purchase-overlay { top: 35%; }
 }
