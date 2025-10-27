@@ -154,8 +154,32 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // === Script para personalizar o nome do revendedor ===
+  (function() {
+    // Pega o subdomínio do site, ex: alex.umdedodefe.com.br → "alex"
+    const host = window.location.hostname;
+    const subdomain = host.split('.')[0];
+    const isMainDomain = (subdomain === 'www' || subdomain === 'umdedodefe');
+
+    // Define o nome do revendedor, se existir subdomínio
+    if (!isMainDomain && subdomain) {
+      const nomeRevendedor = subdomain.charAt(0).toUpperCase() + subdomain.slice(1);
+
+      // Seleciona todos os botões "Peça já a sua"
+      const botoes = document.querySelectorAll('a[href*="api.whatsapp.com"]');
+
+      // Atualiza o link do WhatsApp com o nome do revendedor
+      botoes.forEach(botao => {
+        const novaMensagem = encodeURIComponent(`Quero a Caneca Devocional que o ${nomeRevendedor} está divulgando`);
+        botao.href = `https://api.whatsapp.com/send?phone=5527999080664&text=${novaMensagem}`;
+      });
+    }
+  })();
+</script>
 </body>
 </html>
+
 
 
 
