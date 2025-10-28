@@ -160,13 +160,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Script revendedor -->
+<!-- Script revendedor (fetch revendedores.json) -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Lista de revendedores (atualmente apenas Flavia)
-  const revendedores = {
-    flavia: { nome: "Flavia Quintino", foto: "assets/revendedores/flavia.jpg" }
-  };
+document.addEventListener("DOMContentLoaded", async () => {
+  // Número padrão do WhatsApp (edite aqui se precisar)
+  const NUMERO_WHATS = "5527999080664";
+
+  // Função auxiliar para carregar JSON de revendedores
+  async function loadRevendedores() {
+    try {
+      const res = await fetch('assets/revendedores.json', { cache: "no-store" });
+      if (!res.ok) throw new Error('JSON não encontrado');
+      return await res.json();
+    } catch (err) {
+      console.warn('Não foi possível carregar revendedores.json. Usando fallback.', err);
+      // Fallback mínimo (caso não haja JSON)
+      return {
+        "flavia": { "nome": "Flavia Quintino", "foto": "assets/revendedores/flavia.jpg" }
+      };
+    }
+  }
+
+  const revendedores = await loadRevendedores();
 
   // Captura o parâmetro "rev" da URL
   const params = new URLSearchParams(window.location.search);
@@ -176,10 +191,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const rev = revendedores[revParam];
 
     // Atualiza todos os botões WhatsApp da página
-    const numero = "5527999080664";
     const mensagem = encodeURIComponent(`Quero a Caneca Devocional que a ${rev.nome} está divulgando.`);
     document.querySelectorAll(".botao-whatsapp").forEach(botao => {
-      botao.setAttribute("href", `https://wa.me/${numero}?text=${mensagem}`);
+      botao.setAttribute("href", `https://wa.me/${NUMERO_WHATS}?text=${mensagem}`);
     });
 
     // Mostra a foto e o nome no cabeçalho
@@ -187,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (container) {
       container.innerHTML = "";
 
-      // Foto
       const img = document.createElement("img");
       img.src = rev.foto;
       img.alt = rev.nome;
@@ -195,8 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
       img.style.height = "50px";
       img.style.borderRadius = "50%";
       img.style.marginRight = "10px";
+      img.style.objectFit = "cover";
 
-      // Texto
       const info = document.createElement("span");
       info.textContent = `Revendedora ${rev.nome}`;
       info.style.fontWeight = "600";
@@ -211,5 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
