@@ -163,11 +163,9 @@
 <!-- Script revendedor -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Lista de revendedores
+  // Lista de revendedores (atualmente apenas Flavia)
   const revendedores = {
-    alex: { nome: "Alex", cidade: "Vila Velha", foto: "assets/revendedores/alex.jpg" },
-    maria: { nome: "Maria", cidade: "Vitória", foto: "assets/revendedores/maria.jpg" },
-    joao: { nome: "João", cidade: "Serra", foto: "assets/revendedores/joao.jpg" }
+    flavia: { nome: "Flavia Quintino", foto: "assets/revendedores/flavia.jpg" }
   };
 
   // Captura o parâmetro "rev" da URL
@@ -179,12 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Atualiza todos os botões WhatsApp da página
     const numero = "5527999080664";
-    const mensagem = encodeURIComponent(`Quero a Caneca Devocional que o ${rev.nome} está divulgando.`);
+    const mensagem = encodeURIComponent(`Quero a Caneca Devocional que a ${rev.nome} está divulgando.`);
     document.querySelectorAll(".botao-whatsapp").forEach(botao => {
       botao.setAttribute("href", `https://wa.me/${numero}?text=${mensagem}`);
     });
 
-    // Mostra a foto e cidade no cabeçalho
+    // Mostra a foto e o nome no cabeçalho
     const container = document.querySelector(".revendedor-info");
     if (container) {
       container.innerHTML = "";
@@ -200,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Texto
       const info = document.createElement("span");
-      info.textContent = `Divulgado por ${rev.nome} — ${rev.cidade}`;
+      info.textContent = `Revendedora ${rev.nome}`;
       info.style.fontWeight = "600";
       info.style.fontSize = "16px";
 
@@ -213,4 +211,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
