@@ -15,18 +15,31 @@ body {
 .custom-navbar {
   background-color: #3E1E14 !important;
 }
+
 .navbar-logo {
   height: 50px;
   width: auto;
 }
+
 .nav-link {
   font-weight: 700;
   color: #fff !important;
   margin-left: 1rem;
   transition: color .2s;
 }
+
 .nav-link:hover {
   color: #b3672a !important;
+}
+
+/* Revendedor na navbar */
+.revendedor-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 /* Hero */
@@ -35,6 +48,7 @@ body {
   height: 90vh;
   overflow: hidden;
 }
+
 .hero-bg {
   width: 100%;
   height: 100%;
@@ -42,6 +56,7 @@ body {
   position: absolute;
   z-index: 1;
 }
+
 .logo-floating {
   position: absolute;
   top: 18%;
@@ -50,6 +65,7 @@ body {
   z-index: 2;
   filter: drop-shadow(0 4px 10px rgba(0,0,0,.3));
 }
+
 .hero-content {
   position: relative;
   z-index: 3;
@@ -57,12 +73,14 @@ body {
   transform: translateY(-50%);
   text-align: center;
 }
+
 .hero-phrase {
   font-family: 'Alex Brush', cursive;
   font-size: 2.6rem;
   color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
+
 .btn-cta {
   background: var(--highlight);
   color: #fff;
@@ -72,6 +90,7 @@ body {
   text-transform: uppercase;
   border: none;
 }
+
 .btn-cta:hover {
   background: #3B2A1A;
   color: #fff;
@@ -94,6 +113,7 @@ body {
   margin: 1rem 0;
   color: #fff;
 }
+
 .testimonial-img {
   width: 90px;
   height: 90px;
@@ -101,6 +121,7 @@ body {
   object-fit: cover;
   border: 3px solid #fff;
 }
+
 .name { font-weight: 700; margin-top: 0.75rem; }
 
 /* Comprar */
@@ -108,6 +129,7 @@ body {
   position: relative;
   display: inline-block;
 }
+
 .purchase-overlay {
   position: absolute;
   top: 50%;
@@ -117,20 +139,24 @@ body {
   width: 100%;
   color: #fff;
 }
+
 .purchase-overlay .phrase-top,
 .purchase-overlay .old-price {
   color: #3B2A1A;
 }
+
 .phrase-top {
   font-weight: 700;
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
 }
+
 .old-price {
   text-decoration: line-through;
   font-size: 1.3rem;
   margin-bottom: 0;
 }
+
 .new-price {
   font-size: 3.2rem;
   font-weight: 800;
@@ -151,7 +177,7 @@ footer a:hover { text-decoration: underline; }
 
   .logo-floating {
     width: 180px;
-    top: 24%;       /* desce um pouco a logo */
+    top: 24%;       
     left: 50%;
     transform: translateX(-50%);
   }
@@ -216,13 +242,31 @@ footer a:hover { text-decoration: underline; }
     text-shadow: none;
     font-size: 2.4rem;
   }
+
+  /* Revendedor - mobile */
+  .revendedor-info {
+    font-size: 14px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .revendedor-info img {
+    width: 40px;
+    height: 40px;
+    margin: 0 0 5px 0;
+  }
 }
+
 /* Ícone do menu (hambúrguer) branco */
 .navbar-toggler {
-  border-color: transparent; /* remove a borda padrão */
+  border-color: transparent;
 }
 
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+/* Ajuste container navbar */
+.custom-navbar .container {
+  justify-content: space-between;
+}
