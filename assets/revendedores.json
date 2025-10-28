@@ -14,5 +14,9 @@
     "carol": {
     "nome": "Adhelaine Caroline",
     "foto": "assets/revendedores/carol.jpg"
+  },
+    "denisegil": {
+    "nome": "Denise Gil",
+    "foto": "assets/revendedores/denisegil.jpg"
   }
 }
