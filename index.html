@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -35,9 +35,9 @@
         </div>
       </div>
     </nav>
-    
-    <!-- Aqui vai aparecer a foto e cidade do revendedor -->
-<div class="revendedor-info d-flex align-items-center justify-content-center mt-2"></div>
+
+    <!-- Foto e cidade do revendedor -->
+    <div class="revendedor-info d-flex align-items-center justify-content-center mt-2"></div>
   </header>
 
   <!-- Início -->
@@ -157,89 +157,55 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Script revendedor -->
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Captura o parâmetro "rev" da URL
-  const params = new URLSearchParams(window.location.search);
-  const revendedor = params.get("rev");
+  document.addEventListener("DOMContentLoaded", () => {
+    // Lista de revendedores
+    const revendedores = {
+      alex: { nome: "Alex", cidade: "Vila Velha", foto: "assets/revendedores/alex.jpg" },
+      maria: { nome: "Maria", cidade: "Vitória", foto: "assets/revendedores/maria.jpg" },
+      joao: { nome: "João", cidade: "Serra", foto: "assets/revendedores/joao.jpg" }
+    };
 
-  if (revendedor) {
-    // Formata o nome (ex: "alex" → "Alex")
-    const nomeFormatado = revendedor.charAt(0).toUpperCase() + revendedor.slice(1);
+    // Captura o parâmetro "rev" da URL
+    const params = new URLSearchParams(window.location.search);
+    const revParam = params.get("rev");
 
-    // Define o número do WhatsApp
-    const numero = "5527999080664";
+    if (revParam && revendedores[revParam]) {
+      const rev = revendedores[revParam];
 
-    // Mensagem personalizada
-    const mensagem = encodeURIComponent(`Quero a Caneca Devocional que o ${nomeFormatado} está divulgando.`);
+      // Atualiza todos os botões WhatsApp da página
+      const numero = "5527999080664";
+      const mensagem = encodeURIComponent(`Quero a Caneca Devocional que o ${rev.nome} está divulgando.`);
+      document.querySelectorAll(".botao-whatsapp").forEach(botao => {
+        botao.setAttribute("href", `https://wa.me/${numero}?text=${mensagem}`);
+      });
 
-    // Atualiza todos os botões de WhatsApp da página
-    document.querySelectorAll(".botao-whatsapp").forEach(botao => {
-      botao.setAttribute("href", `https://wa.me/${numero}?text=${mensagem}`);
-    });
+      // Mostra a foto e cidade no cabeçalho
+      const container = document.querySelector(".revendedor-info");
+      if (container) {
+        // Foto
+        const img = document.createElement("img");
+        img.src = rev.foto;
+        img.alt = rev.nome;
+        img.style.width = "50px";
+        img.style.height = "50px";
+        img.style.borderRadius = "50%";
+        img.style.marginRight = "10px";
 
-    // (Opcional) Mostra o nome do revendedor na tela
-    const rodape = document.querySelector("footer");
-    if (rodape) {
-      const info = document.createElement("p");
-      info.textContent = `Divulgado por ${nomeFormatado}`;
-      info.style.fontWeight = "600";
-      info.style.marginTop = "10px";
-      rodape.appendChild(info);
+        // Texto
+        const info = document.createElement("span");
+        info.textContent = `Divulgado por ${rev.nome} — ${rev.cidade}`;
+        info.style.fontWeight = "600";
+        info.style.fontSize = "16px";
+
+        container.appendChild(img);
+        container.appendChild(info);
+      }
     }
-  }
-});
-</script>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Lista de revendedores
-  const revendedores = {
-    alex: { nome: "Alex", cidade: "Vila Velha", foto: "assets/revendedores/alex.jpg" },
-    maria: { nome: "Maria", cidade: "Vitória", foto: "assets/revendedores/maria.jpg" },
-    joao: { nome: "João", cidade: "Serra", foto: "assets/revendedores/joao.jpg" }
-  };
-
-  // Captura o parâmetro "rev" da URL
-  const params = new URLSearchParams(window.location.search);
-  const revParam = params.get("rev");
-
-  if (revParam && revendedores[revParam]) {
-    const rev = revendedores[revParam];
-
-    // Atualiza todos os botões WhatsApp da página
-    const numero = "5527999080664";
-    const mensagem = encodeURIComponent(`Quero a Caneca Devocional que o ${rev.nome} está divulgando.`);
-    document.querySelectorAll(".botao-whatsapp").forEach(botao => {
-      botao.setAttribute("href", `https://wa.me/${numero}?text=${mensagem}`);
-    });
-
-    // Mostra a foto e cidade no cabeçalho
-    const container = document.querySelector(".revendedor-info");
-    if (container) {
-      // Foto
-      const img = document.createElement("img");
-      img.src = rev.foto;
-      img.alt = rev.nome;
-      img.style.width = "50px";
-      img.style.height = "50px";
-      img.style.borderRadius = "50%";
-      img.style.marginRight = "10px";
-
-      // Texto
-      const info = document.createElement("span");
-      info.textContent = `Divulgado por ${rev.nome} — ${rev.cidade}`;
-      info.style.fontWeight = "600";
-      info.style.fontSize = "16px";
-
-      container.appendChild(img);
-      container.appendChild(info);
-    }
-  }
-});
-</script>
+  });
+  </script>
 
 </body>
 </html>
-
-
-
