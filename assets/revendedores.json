@@ -3,11 +3,12 @@
     "nome": "Flavia Quintino",
     "foto": "assets/revendedores/flavia.jpg"
   },
-    "larissaaraujocerqueira": {
+  "larissaaraujocerqueira": {
     "nome": "Larissa Araujo",
     "foto": "assets/revendedores/larissaaraujocerqueira.jpg"
   },
-    "anapauladasilva": {
+  "anapauladasilva": {
     "nome": "Ana Paula",
     "foto": "assets/revendedores/anapauladasilva.jpg"
-  },
+  }
+}
