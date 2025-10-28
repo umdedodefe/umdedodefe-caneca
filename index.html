@@ -190,7 +190,56 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Lista de revendedores
+  const revendedores = {
+    alex: { nome: "Alex", cidade: "Vila Velha", foto: "assets/revendedores/alex.jpg" },
+    maria: { nome: "Maria", cidade: "Vitória", foto: "assets/revendedores/maria.jpg" },
+    joao: { nome: "João", cidade: "Serra", foto: "assets/revendedores/joao.jpg" }
+  };
+
+  // Captura o parâmetro "rev" da URL
+  const params = new URLSearchParams(window.location.search);
+  const revParam = params.get("rev");
+
+  if (revParam && revendedores[revParam]) {
+    const rev = revendedores[revParam];
+
+    // Atualiza todos os botões WhatsApp da página
+    const numero = "5527999080664";
+    const mensagem = encodeURIComponent(`Quero a Caneca Devocional que o ${rev.nome} está divulgando.`);
+    document.querySelectorAll(".botao-whatsapp").forEach(botao => {
+      botao.setAttribute("href", `https://wa.me/${numero}?text=${mensagem}`);
+    });
+
+    // Mostra a foto e cidade no cabeçalho
+    const container = document.querySelector(".revendedor-info");
+    if (container) {
+      // Foto
+      const img = document.createElement("img");
+      img.src = rev.foto;
+      img.alt = rev.nome;
+      img.style.width = "50px";
+      img.style.height = "50px";
+      img.style.borderRadius = "50%";
+      img.style.marginRight = "10px";
+
+      // Texto
+      const info = document.createElement("span");
+      info.textContent = `Divulgado por ${rev.nome} — ${rev.cidade}`;
+      info.style.fontWeight = "600";
+      info.style.fontSize = "16px";
+
+      container.appendChild(img);
+      container.appendChild(info);
+    }
+  }
+});
+</script>
+
 </body>
 </html>
+
 
 
