@@ -43,7 +43,7 @@
     <img src="assets/logo-um-dedo-de-fe.png" class="logo-floating" alt="Logo Um Dedo de Fé">
     <div class="hero-content text-center">
       <p class="hero-phrase">Sua rotina muda quando Deus é prioridade.</p>
-      <a href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank" class="btn btn-cta btn-lg mt-3">PEÇA JÁ A SUA</a>
+      <a href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank" class="btn btn-cta btn-lg mt-3 botao-whatsapp">PEÇA JÁ A SUA</a>
     </div>
   </section>
 
@@ -58,7 +58,7 @@
           <h2 class="title-section">Um Dedo de Fé</h2>
           <p class="lead fw-semibold">Comece o dia com propósito!</p>
           <p>Nossa Caneca Devocional foi criada para acompanhar seus momentos de oração e reflexão, trazendo mensagens que fortalecem a fé e aquecem o coração. Perfeita para seu café da manhã com Deus ou para presentear alguém especial.</p>
-          <a class="btn btn-cta mt-3" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
+          <a class="btn btn-cta mt-3 botao-whatsapp" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
           <p class="phrase-top">Não fique de fora dessa experiência!</p>
           <p class="old-price">De R$49,90</p>
           <p class="new-price">Por R$45,00</p>
-          <a class="btn btn-cta mt-3" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
+          <a class="btn btn-cta mt-3 botao-whatsapp" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
         </div>
       </div>
     </div>
@@ -154,5 +154,39 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Captura o parâmetro "rev" da URL
+  const params = new URLSearchParams(window.location.search);
+  const revendedor = params.get("rev");
+
+  if (revendedor) {
+    // Formata o nome (ex: "alex" → "Alex")
+    const nomeFormatado = revendedor.charAt(0).toUpperCase() + revendedor.slice(1);
+
+    // Define o número do WhatsApp
+    const numero = "5527999080664";
+
+    // Mensagem personalizada
+    const mensagem = encodeURIComponent(`Quero a Caneca Devocional que o ${nomeFormatado} está divulgando.`);
+
+    // Atualiza todos os botões de WhatsApp da página
+    document.querySelectorAll(".botao-whatsapp").forEach(botao => {
+      botao.setAttribute("href", `https://wa.me/${numero}?text=${mensagem}`);
+    });
+
+    // (Opcional) Mostra o nome do revendedor na tela
+    const rodape = document.querySelector("footer");
+    if (rodape) {
+      const info = document.createElement("p");
+      info.textContent = `Divulgado por ${nomeFormatado}`;
+      info.style.fontWeight = "600";
+      info.style.marginTop = "10px";
+      rodape.appendChild(info);
+    }
+  }
+});
+</script>
 </body>
 </html>
+
