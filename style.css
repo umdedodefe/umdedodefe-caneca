@@ -270,24 +270,3 @@ footer a:hover { text-decoration: underline; }
 .custom-navbar .container {
   justify-content: space-between;
 }
-/* --- Ajustes para mobile (revendedor + logo) --- */
-@media (max-width: 768px) {
-  .hero {
-    padding-top: 120px; /* cria espaço para a navbar com foto e nome */
-  }
-
-  .logo-floating {
-    margin-top: 20px; /* move a logo um pouco pra baixo */
-    max-width: 80%; /* garante que a logo não ultrapasse a tela */
-  }
-
-  .revendedor-info img {
-    width: 40px !important;
-    height: 40px !important;
-  }
-
-  .revendedor-info span {
-    font-size: 14px !important;
-  }
-}
-
