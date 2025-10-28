@@ -177,7 +177,7 @@ footer a:hover { text-decoration: underline; }
 
   .logo-floating {
     width: 180px;
-    top: 50%;       
+    top: 34%; /* antes era 24% */       
     left: 50%;
     transform: translateX(-50%);
   }
@@ -270,5 +270,6 @@ footer a:hover { text-decoration: underline; }
 .custom-navbar .container {
   justify-content: space-between;
 }
+
 
 
