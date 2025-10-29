@@ -58,5 +58,9 @@
     "jacquelinesales": {
     "nome": "Jacqueline Sales",
     "foto": "assets/revendedores/jacquelinesales.jpg"
+  },
+    "ronivaldopenedo": {
+    "nome": "Ronivaldo Penedo",
+    "foto": "assets/revendedores/ronivaldopenedo.jpg"
   }
 }
