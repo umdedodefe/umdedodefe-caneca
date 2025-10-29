@@ -22,5 +22,9 @@
     "rosangeladossantos": {
     "nome": "Rosângela dos Santos",
     "foto": "assets/revendedores/rosangeladossantos.jpg"
+  },
+    "tiakaka": {
+    "nome": "Tia KaKa",
+    "foto": "assets/revendedores/tiakaka.jpg"
   }
 }
