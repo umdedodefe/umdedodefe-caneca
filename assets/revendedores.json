@@ -30,5 +30,9 @@
     "willianjefferson": {
     "nome": "Willian Jefferson",
     "foto": "assets/revendedores/willianjefferson.jpg"
+  },
+    "elizabethrodrigues": {
+    "nome": "Elizabeth Rodrigues",
+    "foto": "assets/revendedores/elizabethrodrigues.jpg"
   }
 }
