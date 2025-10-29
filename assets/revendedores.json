@@ -54,5 +54,9 @@
     "wandersondasilva": {
     "nome": "Wanderson da Silva",
     "foto": "assets/revendedores/wandersondasilva.jpg"
+  },
+    "jacquelinesales": {
+    "nome": "Jacqueline Sales",
+    "foto": "assets/revendedores/jacquelinesales.jpg"
   }
 }
