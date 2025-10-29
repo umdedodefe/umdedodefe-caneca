@@ -26,5 +26,9 @@
     "tiakaka": {
     "nome": "Tia KaKa",
     "foto": "assets/revendedores/tiakaka.jpg"
+  },
+    "willianjefferson": {
+    "nome": "Willian Jefferson",
+    "foto": "assets/revendedores/willianjefferson.jpg"
   }
 }
