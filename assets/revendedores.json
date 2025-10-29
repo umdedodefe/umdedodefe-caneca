@@ -42,5 +42,9 @@
     "tinabrum": {
     "nome": "Tina Brum",
     "foto": "assets/revendedores/tinabrum.jpg"
+  },
+    "mariajose": {
+    "nome": "Maria José",
+    "foto": "assets/revendedores/mariajose.jpg"
   }
 }
