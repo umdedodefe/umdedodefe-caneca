@@ -66,5 +66,9 @@
     "valeriasilva": {
     "nome": "Valéria Silva",
     "foto": "assets/revendedores/valeriasilva.jpg"
+  },
+    "adrianorodrigues": {
+    "nome": "Adriano Rodrigues",
+    "foto": "assets/revendedores/adrianorodrigues.jpg"
   }
 }
