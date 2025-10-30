@@ -70,5 +70,9 @@
     "adrianorodrigues": {
     "nome": "Adriano Rodrigues",
     "foto": "assets/revendedores/adrianorodrigues.jpg"
+  },
+    "clesiarodrigues": {
+    "nome": "Clesia Rodrigues",
+    "foto": "assets/revendedores/clesiarodrigues.jpg"
   }
 }
