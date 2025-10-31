@@ -82,5 +82,9 @@
     "lidianealves": {
     "nome": "Lidiane Alves",
     "foto": "assets/revendedores/lidianealves.jpg"
+  },
+    "monicapereira": {
+    "nome": "Mônica Pereira",
+    "foto": "assets/revendedores/monicapereira.jpg"
   }
 }
