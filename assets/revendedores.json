@@ -86,5 +86,9 @@
     "monicapereira": {
     "nome": "Mônica Pereira",
     "foto": "assets/revendedores/monicapereira.jpg"
+  },
+    "marcelalopes": {
+    "nome": "Marcela Lopes",
+    "foto": "assets/revendedores/marcelalopes.jpg"
   }
 }
