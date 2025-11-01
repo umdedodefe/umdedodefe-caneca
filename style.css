@@ -132,7 +132,7 @@ body {
 
 .purchase-overlay {
   position: absolute;
-  top: 35%; /* estava 50% — subimos o conteúdo */
+  top: 25%; /* estava 50% — subimos o conteúdo */
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -270,6 +270,7 @@ footer a:hover { text-decoration: underline; }
 .custom-navbar .container {
   justify-content: space-between;
 }
+
 
 
 
