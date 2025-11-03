@@ -106,5 +106,9 @@
     "priscillamartins": {
     "nome": "Priscilla Martins",
     "foto": "assets/revendedores/priscillamartins.jpg"
+  },
+    "ibev": {
+    "nome": "Igreja Batista Esperança Viva",
+    "foto": "assets/revendedores/ibv.jpg"
   }
 }
