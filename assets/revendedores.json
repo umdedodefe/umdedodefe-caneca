@@ -110,5 +110,9 @@
     "ibev": {
     "nome": "Igreja Batista Esperança Viva",
     "foto": "assets/revendedores/ibev.jpg"
+  },
+    "osmelhoresachadinhosdagi": {
+    "nome": "Os melhores achadinhos da Gi",
+    "foto": "assets/revendedores/osmelhoresachadinhosdagi.jpg"
   }
 }
