@@ -126,5 +126,9 @@
     "ebddecasais": {
     "nome": "EBD de Casais",
     "foto": "assets/revendedores/ebddecasais.jpg"
+  },
+    "cristianefreire": {
+    "nome": "Cristiane Freire",
+    "foto": "assets/revendedores/cristianefreire.jpg"
   }
 }
