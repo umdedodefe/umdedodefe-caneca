@@ -134,5 +134,9 @@
     "miriellyfreire": {
     "nome": "Mirielly Freire",
     "foto": "assets/revendedores/miriellyfreire.jpg"
+  },
+    "estermarques": {
+    "nome": "Ester Marques",
+    "foto": "assets/revendedores/estermarques.jpg"
   }
 }
