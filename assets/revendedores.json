@@ -138,5 +138,9 @@
     "estermarques": {
     "nome": "Ester Marques",
     "foto": "assets/revendedores/estermarques.jpg"
+  },
+    "?rev=igrejamcivilavelha": {
+    "nome": "?rev=Igreja MCI Vila Velha",
+    "foto": "assets/revendedores/?rev=igrejamcivilavelha.jpg"
   }
 }
