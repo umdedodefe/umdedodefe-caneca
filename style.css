@@ -1,4 +1,4 @@
-:root { 
+:root {
   --brown-dark: #3B2A1A;
   --cream: #F7F2EA;
   --highlight: #b3672a;
@@ -46,3 +46,227 @@ body {
 .hero {
   position: relative;
   height: 90vh;
+  overflow: hidden;
+}
+
+.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 1;
+}
+
+.logo-floating {
+  position: absolute;
+  top: 18%;
+  left: 8%;
+  width: 250px;
+  z-index: 2;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.3));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  top: 75%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.hero-phrase {
+  font-family: 'Alex Brush', cursive;
+  font-size: 2.6rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.btn-cta {
+  background: var(--highlight);
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.8rem 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+}
+
+.btn-cta:hover {
+  background: #3B2A1A;
+  color: #fff;
+}
+
+/* Sections */
+.section-about { background-color: #4D3821; color: #fff; }
+.section-models { background-color: #B78752; color: #fff; }
+.section-testimonials { background-color: #7C5C52; color: #fff; }
+.section-footer { background-color: #BC6C25; color: #fff; }
+
+/* Titles */
+.title-section { font-weight: 700; }
+
+/* Testemunhos */
+.testimonial-card {
+  background-color: #B78752;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  color: #fff;
+}
+
+.testimonial-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+.name { font-weight: 700; margin-top: 0.75rem; }
+
+/* Comprar */
+.purchase-container {
+  position: relative;
+  display: inline-block;
+}
+
+.purchase-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  color: #fff;
+}
+
+.purchase-overlay .phrase-top,
+.purchase-overlay .old-price {
+  color: #3B2A1A;
+}
+
+.phrase-top {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.old-price {
+  text-decoration: line-through;
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+
+.new-price {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+/* Footer */
+footer a { color: #fff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Responsivo */
+@media (max-width: 768px) {
+  /* Hero - centralizar logos */
+  .hero {
+    height: 75vh;
+  }
+
+  .logo-floating {
+    width: 180px;
+    top: 30%; /* antes era 24% */       
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Centralizar conteúdo hero */
+  .hero-content {
+    top: 70%;
+    transform: translateY(-40%);
+    text-align: center;
+  }
+
+  .hero-phrase {
+    font-size: 1.8rem;
+  }
+
+  /* Seção Sobre - centralizar tudo */
+  #about .col-md-6 {
+    text-align: center;
+  }
+
+  #about h2,
+  #about p,
+  #about .btn {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Seção Funcionamento - centralizar título e texto */
+  #how .col-md-6 {
+    text-align: center;
+  }
+
+  #how h2,
+  #how p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Ajuste da seção de compra no celular */
+  .purchase-overlay {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    background-color: #fff;
+    color: #3B2A1A;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+  }
+  .purchase-overlay .phrase-top {
+    color: #3B2A1A;
+    font-size: 1.2rem;
+  }
+  .purchase-overlay .old-price {
+    color: #7C5C52;
+  }
+  .purchase-overlay .new-price {
+    color: #3B2A1A;
+    text-shadow: none;
+    font-size: 2.4rem;
+  }
+
+  /* Revendedor - mobile */
+  .revendedor-info {
+    font-size: 14px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .revendedor-info img {
+    width: 40px;
+    height: 40px;
+    margin: 0 0 5px 0;
+  }
+}
+
+/* Ícone do menu (hambúrguer) branco */
+.navbar-toggler {
+  border-color: transparent;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Ajuste container navbar */
+.custom-navbar .container {
+  justify-content: space-between;
+}
