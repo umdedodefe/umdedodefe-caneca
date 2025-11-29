@@ -130,6 +130,7 @@ body {
   display: inline-block;
 }
 
+/* 🟦 ADICIONADO → Fundo branco translúcido no DESKTOP */
 .purchase-overlay {
   position: absolute;
   top: 50%;
@@ -138,6 +139,11 @@ body {
   text-align: center;
   width: 100%;
   color: #fff;
+
+  /* NOVO – fundo translúcido para desktop */
+  background: rgba(255, 255, 255, 0.75);
+  padding: 1.5rem;
+  border-radius: 12px;
 }
 
 .purchase-overlay .phrase-top,
@@ -170,6 +176,7 @@ footer a:hover { text-decoration: underline; }
 
 /* Responsivo */
 @media (max-width: 768px) {
+
   /* Hero - centralizar logos */
   .hero {
     height: 75vh;
@@ -177,7 +184,7 @@ footer a:hover { text-decoration: underline; }
 
   .logo-floating {
     width: 180px;
-    top: 30%; /* antes era 24% */       
+    top: 30%;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -206,7 +213,7 @@ footer a:hover { text-decoration: underline; }
     margin-right: auto;
   }
 
-  /* Seção Funcionamento - centralizar título e texto */
+  /* Seção Funcionamento */
   #how .col-md-6 {
     text-align: center;
   }
@@ -218,7 +225,7 @@ footer a:hover { text-decoration: underline; }
     margin-right: auto;
   }
 
-  /* Ajuste da seção de compra no celular */
+  /* Modo mobile — fundo sólido branco */
   .purchase-overlay {
     position: relative;
     top: auto;
@@ -230,20 +237,23 @@ footer a:hover { text-decoration: underline; }
     border-radius: 10px;
     margin-top: 1rem;
   }
+
   .purchase-overlay .phrase-top {
     color: #3B2A1A;
     font-size: 1.2rem;
   }
+
   .purchase-overlay .old-price {
     color: #7C5C52;
   }
+
   .purchase-overlay .new-price {
     color: #3B2A1A;
     text-shadow: none;
     font-size: 2.4rem;
   }
 
-  /* Revendedor - mobile */
+  /* Revendedor mobile */
   .revendedor-info {
     font-size: 14px;
     flex-direction: column;
@@ -257,7 +267,7 @@ footer a:hover { text-decoration: underline; }
   }
 }
 
-/* Ícone do menu (hambúrguer) branco */
+/* Ícone do menu branco */
 .navbar-toggler {
   border-color: transparent;
 }
@@ -270,10 +280,3 @@ footer a:hover { text-decoration: underline; }
 .custom-navbar .container {
   justify-content: space-between;
 }
-
-
-
-
-
-
-
