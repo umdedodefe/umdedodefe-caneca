@@ -136,8 +136,15 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width: 100%;
+  width: auto; /* antes era 100% */
   color: #fff;
+
+  /* 🔥 RETÂNGULO TRANSLÚCIDO ATRÁS DO TEXTO */
+  background: rgba(255, 255, 255, 0.65);
+  padding: 1.2rem 1.8rem;
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
+  display: inline-block;
 }
 
 .purchase-overlay .phrase-top,
@@ -270,3 +277,4 @@ footer a:hover { text-decoration: underline; }
 .custom-navbar .container {
   justify-content: space-between;
 }
+
