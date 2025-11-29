@@ -137,7 +137,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width: 100%;
+  width: 350%;
   color: #fff;
 
   /* NOVO – fundo translúcido para desktop */
@@ -280,3 +280,4 @@ footer a:hover { text-decoration: underline; }
 .custom-navbar .container {
   justify-content: space-between;
 }
+
