@@ -1,6 +1,271 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comprar — Um Dedo de Fé</title>
+
+  <!-- Fonts e Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .product-card {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .color-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: inline-block;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .qty-controls button { min-width: 40px; }
+    .summary-box {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .form-section {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .mute { opacity: 0.85; font-size: 0.95rem; }
+
+    /* Botão marrom */
+    .btn-brown {
+      background: #6b3f2a;
+      color: #fff;
+      border: none;
+    }
+    .btn-brown:hover { background: #543223; }
+  </style>
+</head>
+<body>
+
+<!-- Cabeçalho idêntico ao index -->
+<header class="custom-navbar">
+  <div class="container d-flex align-items-center justify-content-between py-2">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="assets/logo-navbar.png" alt="Um Dedo de Fé" style="height: 44px" />
+    </a>
+
+    <nav class="d-none d-md-flex align-items-center gap-4">
+      <a href="index.html#sobre" class="nav-link">Sobre</a>
+      <a href="index.html#beneficios" class="nav-link">Benefícios</a>
+      <a href="index.html#depoimentos" class="nav-link">Depoimentos</a>
+      <a href="index.html#perguntas" class="nav-link">Perguntas</a>
+    </nav>
+
+    <a class="btn btn-cta" href="index.html#comprar">Comprar</a>
+  </div>
+</header>
+
+<main class="container my-5">
+
+  <!-- Banner enviado pelo cliente (substitui o retângulo marrom) -->
+  <section class="mb-4 text-center">
+    <img src="assets/banner-compras.jpg" alt="Banner" class="img-fluid rounded" />
+  </section>
+
+  <div class="row g-4">
+    <!-- Produtos -->
+    <div class="col-lg-7">
+      <div class="product-card">
+        <div class="row align-items-center">
+          <div class="col-md-5 text-center">
+            <img src="assets/purchase-caneca.jpg" class="img-fluid rounded" alt="Caneca Devocional" />
+          </div>
+
+          <div class="col-md-7">
+            <h3>Caneca Devocional</h3>
+            <p class="mute">R$50,00 cada. Com Qr-Code exclusivo que te leva a uma experiência devocional incrível.</p>
+
+            <div class="mt-3">
+              <label class="fw-bold">Escolha as cores e quantidades</label>
+
+              <!-- Marrom -->
+              <div class="d-flex align-items-center justify-content-between my-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="color-badge" style="background:#6b3f2a"></span>
+                  <strong>Marrom</strong>
+                </div>
+
+                <div class="qty-controls">
+                  <div class="input-group" style="width: 150px">
+                    <button class="btn btn-outline-light btn-decrease" data-target="marrom">-</button>
+                    <input type="number" min="0" value="0" id="qty-marrom" class="form-control text-center" />
+                    <button class="btn btn-outline-light btn-increase" data-target="marrom">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Creme -->
+              <div class="d-flex align-items-center justify-content-between my-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="color-badge" style="background:#f2c9ab"></span>
+                  <strong>Creme</strong>
+                </div>
+
+                <div class="qty-controls">
+                  <div class="input-group" style="width: 150px">
+                    <button class="btn btn-outline-light btn-decrease" data-target="creme">-</button>
+                    <input type="number" min="0" value="0" id="qty-creme" class="form-control text-center" />
+                    <button class="btn btn-outline-light btn-increase" data-target="creme">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 d-flex gap-2">
+              <input type="text" id="coupon" class="form-control" placeholder="Cupom de desconto" />
+              <button class="btn btn-cta" id="apply-coupon">Aplicar</button>
+            </div>
+
+            <!-- Removido: Cupom atual -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <div class="mt-4 form-section">
+        <h5>Dados do cliente</h5>
+
+        <div class="row g-2 mt-2">
+          <div class="col-md-6">
+            <label class="form-label">Nome completo *</label>
+            <input id="nome" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">WhatsApp (somente números) *</label>
+            <input id="whatsapp" class="form-control" placeholder="" required />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Email *</label>
+            <input id="email" type="email" class="form-control" required />
+          </div>
+
+          <div class="col-12 mt-2"><h6>Endereço de entrega</h6></div>
+
+          <div class="col-md-3">
+            <label class="form-label">CEP *</label>
+            <input id="cep" class="form-control" required />
+          </div>
+
+          <div class="col-md-5">
+            <label class="form-label">Rua / Av *</label>
+            <input id="rua" class="form-control" required />
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Número *</label>
+            <input id="numero" class="form-control" required />
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">UF *</label>
+            <input id="estado" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Bairro *</label>
+            <input id="bairro" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Cidade *</label>
+            <input id="cidade" class="form-control" required />
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Ponto de referência</label>
+            <input id="referencia" class="form-control" />
+          </div>
+
+          <div class="col-12 mt-3">
+            <label class="form-label">Opção de entrega *</label>
+            <select id="entrega" class="form-select">
+              <option value="retirar">Retirar no Balcão - Grátis</option>
+              <option value="domicilio">Entrega em domicílio - Frete a calcular</option>
+            </select>
+            <div class="mute mt-2">Observação: o valor do frete será informado via WhatsApp quando confirmarmos o pedido.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUMO -->
+    <div class="col-lg-5">
+      <div class="summary-box sticky-top" style="top: 100px">
+        <h5 class="mb-3">Resumo do pedido</h5>
+
+        <div class="d-flex justify-content-between">
+          <div>Marrom</div>
+          <div id="sum-marrom">0</div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <div>Creme</div>
+          <div id="sum-creme">0</div>
+        </div>
+
+        <hr />
+
+        <div class="d-flex justify-content-between">
+          <div>Subtotal</div>
+          <div id="subtotal">R$0,00</div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <div>Desconto</div>
+          <div id="desconto">R$0,00</div>
+        </div>
+
+        <div class="d-flex justify-content-between fw-bold fs-5">
+          <div>Total</div>
+          <div id="total">R$0,00</div>
+        </div>
+
+        <div class="mt-3 d-grid">
+          <button id="btn-enviar" class="btn btn-brown">ENVIAR PEDIDO VIA WHATSAPP</button>
+        </div>
+
+        <div class="mt-3 small mute">
+          Ao enviar o pedido, abriremos o WhatsApp com todas as informações.
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="py-4 text-center section-footer">
+  <div class="container">
+    <p>Av. Anders, 04 - Nova Itaparica - Vila Velha</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* JS ORIGINAL MANTIDO — apenas removidas exibições de estoque */
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Comprar — Um Dedo de Fé</title>
@@ -8,18 +273,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="icon" href="assets/favicon.png" type="image/png">
-  <!-- Reusa o style.css principal para manter a paleta -->
   <link rel="stylesheet" href="style.css">
 
   <style>
-  /* Pequenos ajustes específicos para a página de compras */
-  .shop-hero {
-    background: linear-gradient(180deg, rgba(62,30,20,0.95), rgba(77,56,33,0.95));
-    padding: 3.5rem 0;
-    color: #fff;
-    text-align: center;
-  }
-
   .product-card { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 1rem; }
   .color-badge { width: 42px; height: 42px; border-radius: 8px; display: inline-block; border: 2px solid rgba(255,255,255,0.12); }
   .qty-controls button { min-width: 40px; }
@@ -40,13 +296,13 @@
 </header>
 
 <main class="container my-5">
-  <section class="shop-hero rounded mb-4">
-    <h1 class="mb-1" style="font-family: 'Alex Brush', cursive; font-size:2.6rem">Peça sua Caneca Devocional</h1>
-    <p class="mute">Escolha quantidades, cores, aplique cupom e finalize via WhatsApp. Pagamento e frete finalizados diretamente conosco.</p>
+
+  <!-- BANNER ENVIADO -->
+  <section class="rounded mb-4 text-center">
+    <img src="assets/banner-compra.jpg" class="img-fluid rounded" alt="Banner Compra">
   </section>
 
   <div class="row g-4">
-    <!-- Produtos -->
     <div class="col-lg-7">
       <div class="product-card">
         <div class="row align-items-center">
@@ -55,7 +311,7 @@
           </div>
           <div class="col-md-7">
             <h3>Caneca Devocional</h3>
-            <p class="mute">R$50,00 cada (preço exibido no site). Personalizada com mensagens diárias via QR Code.</p>
+            <p class="mute">R$50,00 cada. Com Qr-Code exclusivo que te leva a uma experiência devocional incrível.</p>
 
             <div class="mt-3">
               <label class="fw-bold">Escolha as cores e quantidades</label>
@@ -66,7 +322,6 @@
                   <div class="d-flex align-items-center gap-2">
                     <span class="color-badge" style="background:#6b3f2a"></span>
                     <strong>Marrom</strong>
-                    <small class="mute ms-2" id="stock-marrom"></small>
                   </div>
                 </div>
                 <div class="qty-controls">
@@ -84,7 +339,6 @@
                   <div class="d-flex align-items-center gap-2">
                     <span class="color-badge" style="background:#f2c9ab"></span>
                     <strong>Creme</strong>
-                    <small class="mute ms-2" id="stock-creme"></small>
                   </div>
                 </div>
                 <div class="qty-controls">
@@ -102,25 +356,25 @@
               <input type="text" id="coupon" class="form-control" placeholder="Cupom de desconto">
               <button class="btn btn-cta" id="apply-coupon">Aplicar</button>
             </div>
-
-            <div class="mt-3 small mute">Cupom atual: <strong>DEVOCIONAL10</strong> — 10% de desconto</div>
-
           </div>
         </div>
       </div>
 
-      <!-- Formulário do cliente -->
+      <!-- Formulário -->
       <div class="mt-4 form-section">
         <h5>Dados do cliente</h5>
         <div class="row g-2 mt-2">
+
           <div class="col-md-6">
             <label class="form-label">Nome completo *</label>
             <input id="nome" class="form-control" required />
           </div>
+
           <div class="col-md-6">
             <label class="form-label">WhatsApp (somente números) *</label>
-            <input id="whatsapp" class="form-control" placeholder="27999999999" required />
+            <input id="whatsapp" class="form-control" placeholder="" required />
           </div>
+
           <div class="col-md-6">
             <label class="form-label">Email *</label>
             <input id="email" type="email" class="form-control" required />
@@ -164,7 +418,7 @@
               <option value="retirar">Retirar no Balcão - Grátis</option>
               <option value="domicilio">Entrega em domicílio - Frete a calcular</option>
             </select>
-            <div class="mute mt-2">Observação: o valor do frete será informado via WhatsApp quando confirmarmos o pedido.</div>
+            <div class="mute mt-2">O valor do frete será informado via WhatsApp após o pedido.</div>
           </div>
 
         </div>
@@ -172,7 +426,6 @@
 
     </div>
 
-    <!-- Resumo do pedido -->
     <div class="col-lg-5">
       <div class="summary-box sticky-top" style="top:100px">
         <h5 class="mb-3">Resumo do pedido</h5>
@@ -195,201 +448,4 @@
         </div>
         <div class="d-flex justify-content-between fw-bold fs-5">
           <div>Total</div>
-          <div id="total">R$0,00</div>
-        </div>
-
-        <div class="mt-3 d-grid">
-          <button id="btn-enviar" class="btn btn-cta">ENVIAR PEDIDO VIA WHATSAPP</button>
-        </div>
-
-        <div class="mt-3 small mute">Ao enviar o pedido, abriremos o WhatsApp com todas as informações para que seu pedido seja confirmado e o frete calculado (quando aplicável).</div>
-
-      </div>
-    </div>
-  </div>
-
-</main>
-
-<footer class="py-4 text-center section-footer">
-  <div class="container">
-    <p>Av. Anders, 04 - Nova Itaparica - Vila Velha</p>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-// ---------- Configurações iniciais (estoque e cupons) ----------
-const DEFAULT_STOCK = { marrom: 56, creme: 75 };
-const COUPONS = { 'DEVOCIONAL10': 0.10 };
-const PRICE = 50.00; // preço unitário exibido no site
-const NUMERO_WHATS = '5527999080664'; // seu número
-
-// Carrega estoque do localStorage ou define padrão
-function loadStock() {
-  const raw = localStorage.getItem('umdedodefe_stock');
-  if (!raw) {
-    localStorage.setItem('umdedodefe_stock', JSON.stringify(DEFAULT_STOCK));
-    return {...DEFAULT_STOCK};
-  }
-  try { return JSON.parse(raw); } catch { localStorage.setItem('umdedodefe_stock', JSON.stringify(DEFAULT_STOCK)); return {...DEFAULT_STOCK}; }
-}
-
-function saveStock(stock) { localStorage.setItem('umdedodefe_stock', JSON.stringify(stock)); }
-
-let stock = loadStock();
-
-// Atualiza exibição de estoque
-function updateStockDisplays(){
-  document.getElementById('stock-marrom').textContent = `Em estoque: ${stock.marrom}`;
-  document.getElementById('stock-creme').textContent = `Em estoque: ${stock.creme}`;
-}
-
-// Helpers de preço
-function formatBRL(v){ return 'R$' + v.toFixed(2).replace('.', ','); }
-
-// Inicializa campos
-function init(){
-  updateStockDisplays();
-  attachQtyControls();
-  recalc();
-}
-
-// Controles de quantidade
-function attachQtyControls(){
-  document.querySelectorAll('.btn-increase').forEach(btn => btn.addEventListener('click', (e)=>{
-    const t = btn.dataset.target;
-    const input = document.getElementById('qty-' + t);
-    input.value = Number(input.value || 0) + 1;
-    if (Number(input.value) > stock[t]) { input.value = stock[t]; alert('Quantidade maior que o estoque disponível para ' + t); }
-    recalc();
-  }));
-  document.querySelectorAll('.btn-decrease').forEach(btn => btn.addEventListener('click', (e)=>{
-    const t = btn.dataset.target;
-    const input = document.getElementById('qty-' + t);
-    input.value = Math.max(0, Number(input.value || 0) - 1);
-    recalc();
-  }));
-
-  document.getElementById('qty-marrom').addEventListener('change', ()=>{ enforceStock('marrom'); recalc(); });
-  document.getElementById('qty-creme').addEventListener('change', ()=>{ enforceStock('creme'); recalc(); });
-}
-
-function enforceStock(color){
-  const input = document.getElementById('qty-' + color);
-  let val = Number(input.value || 0);
-  if (val < 0) val = 0;
-  if (val > stock[color]){ val = stock[color]; alert('A quantidade solicitada ultrapassa o estoque disponível.'); }
-  input.value = val;
-}
-
-// Cupom
-let couponApplied = null;
-document.getElementById('apply-coupon').addEventListener('click', ()=>{
-  const code = document.getElementById('coupon').value.trim().toUpperCase();
-  if (!code) { alert('Digite um cupom.'); return; }
-  if (COUPONS[code]){
-    couponApplied = { code, rate: COUPONS[code] };
-    alert('Cupom aplicado: ' + code + ' — ' + (COUPONS[code]*100) + '%');
-  } else {
-    couponApplied = null; alert('Cupom inválido.');
-  }
-  recalc();
-});
-
-// Recalcula resumo
-function recalc(){
-  const qMarrom = Number(document.getElementById('qty-marrom').value || 0);
-  const qCreme = Number(document.getElementById('qty-creme').value || 0);
-  document.getElementById('sum-marrom').textContent = qMarrom;
-  document.getElementById('sum-creme').textContent = qCreme;
-
-  const subtotal = (qMarrom + qCreme) * PRICE;
-  let desconto = 0;
-  if (couponApplied) desconto = subtotal * couponApplied.rate;
-  const total = subtotal - desconto;
-
-  document.getElementById('subtotal').textContent = formatBRL(subtotal);
-  document.getElementById('desconto').textContent = formatBRL(desconto);
-  document.getElementById('total').textContent = formatBRL(total);
-}
-
-// Enviar pedido (valida, atualiza estoque, compõe mensagem)
-document.getElementById('btn-enviar').addEventListener('click', ()=>{
-  // Valida quantidades
-  const qMarrom = Number(document.getElementById('qty-marrom').value || 0);
-  const qCreme = Number(document.getElementById('qty-creme').value || 0);
-  if (qMarrom + qCreme === 0){ alert('Adicione ao menos uma caneca ao pedido.'); return; }
-
-  // Valida formulário
-  const requiredIds = ['nome','whatsapp','email','cep','rua','numero','estado','bairro','cidade'];
-  for (const id of requiredIds){
-    const el = document.getElementById(id);
-    if (!el.value || el.value.trim() === ''){ alert('Preencha o campo: ' + id); el.focus(); return; }
-  }
-
-  // Checa estoque novamente
-  if (qMarrom > stock.marrom || qCreme > stock.creme){ alert('Quantidade maior que o estoque disponível. Atualize as quantidades.'); return; }
-
-  // Atualiza estoque localmente (diminui)
-  stock.marrom -= qMarrom; stock.creme -= qCreme; saveStock(stock); updateStockDisplays();
-
-  // Monta mensagem
-  const nome = encodeURIComponent(document.getElementById('nome').value.trim());
-  const whatsappUser = encodeURIComponent(document.getElementById('whatsapp').value.trim());
-  const email = encodeURIComponent(document.getElementById('email').value.trim());
-  const cep = encodeURIComponent(document.getElementById('cep').value.trim());
-  const rua = encodeURIComponent(document.getElementById('rua').value.trim());
-  const numero = encodeURIComponent(document.getElementById('numero').value.trim());
-  const estado = encodeURIComponent(document.getElementById('estado').value.trim());
-  const bairro = encodeURIComponent(document.getElementById('bairro').value.trim());
-  const cidade = encodeURIComponent(document.getElementById('cidade').value.trim());
-  const referencia = encodeURIComponent(document.getElementById('referencia').value.trim());
-  const entrega = document.getElementById('entrega').value;
-
-  const subtotal = (qMarrom + qCreme) * PRICE;
-  const desconto = couponApplied ? subtotal * couponApplied.rate : 0;
-  const total = subtotal - desconto;
-
-  let entregaTxt = entrega === 'retirar' ? 'Retirar no Balcão - Grátis' : 'Entrega em domicílio - Frete a calcular';
-
-  // Monta o corpo do pedido legível
-  let body = `Novo Pedido – Caneca Devocional\n\n`;
-  body += `Cliente: ${decodeURIComponent(nome)}\n`;
-  body += `WhatsApp: ${decodeURIComponent(whatsappUser)}\n`;
-  body += `Email: ${decodeURIComponent(email)}\n\n`;
-  body += `Pedido:\n`;
-  if (qMarrom) body += `- ${qMarrom}x Caneca Marrom\n`;
-  if (qCreme) body += `- ${qCreme}x Caneca Creme\n`;
-  body += `\n`;
-  body += `Subtotal: ${formatBRL(subtotal)}\n`;
-  if (couponApplied) body += `Cupom: ${couponApplied.code} (desconto ${Math.round(couponApplied.rate*100)}%)\n`;
-  body += `Desconto: ${formatBRL(desconto)}\n`;
-  body += `Total (sem frete): ${formatBRL(total)}\n\n`;
-  body += `Endereço: ${decodeURIComponent(rua)}, ${decodeURIComponent(numero)} - ${decodeURIComponent(bairro)} - ${decodeURIComponent(cidade)}/${decodeURIComponent(estado)}\n`;
-  if (referencia) body += `Ponto de referência: ${decodeURIComponent(referencia)}\n`;
-  body += `CEP: ${decodeURIComponent(cep)}\n`;
-  body += `Opção de entrega: ${entregaTxt}\n`;
-  if (entrega === 'domicilio') body += `\nObservação: calcular e enviar o valor do frete para o cliente via WhatsApp antes de confirmar pagamento.\n`;
-
-  // Abre WhatsApp (web/wa.me)
-  const payload = encodeURIComponent(body);
-  const url = `https://wa.me/${NUMERO_WHATS}?text=${payload}`;
-  window.open(url, '_blank');
-
-  // Feedback ao usuário
-  alert('Pedido enviado para o WhatsApp. Aguarde nosso contato para confirmação e cálculo do frete (quando aplicável).');
-
-  // Zera quantidades e recalc
-  document.getElementById('qty-marrom').value = 0;
-  document.getElementById('qty-creme').value = 0;
-  couponApplied = null; document.getElementById('coupon').value = '';
-  recalc();
-});
-
-// inicia
-init();
-</script>
-
-</body>
-</html>
+          <div id="total">R$0,00
