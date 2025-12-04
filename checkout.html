@@ -204,6 +204,46 @@
           </div>
         </div>
 
+        <!-- Forma de Pagamento -->
+<div class="product-card mb-4">
+  <h5 class="fw-bold">Forma de pagamento</h5>
+
+  <!-- PIX -->
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="pagamento" id="pix" value="PIX" checked>
+    <label class="form-check-label" for="pix">
+      PIX
+    </label>
+  </div>
+
+  <!-- Cartão -->
+  <div class="form-check mt-2">
+    <input class="form-check-input" type="radio" name="pagamento" id="cartao" value="Cartão de Crédito">
+    <label class="form-check-label" for="cartao">
+      Cartão de Crédito
+    </label>
+  </div>
+
+  <!-- Parcelas -->
+  <div class="mt-3" id="parcelas-box" style="display:none;">
+    <label>Quantidade de parcelas</label>
+    <select id="parcelas" class="form-control">
+      <option value="1x">1x no cartão</option>
+      <option value="2x">2x com juros</option>
+      <option value="3x">3x com juros</option>
+      <option value="4x">4x com juros</option>
+      <option value="5x">5x com juros</option>
+      <option value="6x">6x com juros</option>
+      <option value="7x">7x com juros</option>
+      <option value="8x">8x com juros</option>
+      <option value="9x">9x com juros</option>
+      <option value="10x">10x com juros</option>
+      <option value="11x">11x com juros</option>
+      <option value="12x">12x com juros</option>
+    </select>
+  </div>
+</div>
+
         <!-- Right: Resumo e enviar -->
         <div class="col-lg-5">
           <div class="summary-box mb-3">
