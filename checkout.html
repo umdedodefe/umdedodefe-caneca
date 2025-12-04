@@ -479,6 +479,32 @@ if (referencia) lines.push(`Ponto de referência: ${referencia}`);
     // Abre whatsapp
     window.open(waLink, "_blank");
   });
+// ===============================
+// AUTOPREENCHIMENTO VIA CEP
+// ===============================
+document.getElementById("cep").addEventListener("blur", async function () {
+  const cep = this.value.replace(/\D/g, "");
+
+  if (cep.length !== 8) return;
+
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const data = await res.json();
+
+    if (data.erro) {
+      alert("CEP não encontrado.");
+      return;
+    }
+
+    document.getElementById("rua").value = data.logradouro || "";
+    document.getElementById("bairro").value = data.bairro || "";
+    document.getElementById("cidade").value = data.localidade || "";
+    document.getElementById("estado").value = data.uf || "";
+
+  } catch (e) {
+    alert("Erro ao buscar CEP. Verifique sua conexão.");
+  }
+});
 
   // Inicialização
   (async function init() {
