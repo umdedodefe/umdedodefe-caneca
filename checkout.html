@@ -400,6 +400,22 @@
   // Enviar pedido
   document.getElementById("btn-send").addEventListener("click", () => {
     if (!validateForm()) return;
+    
+      const entregaSelecionada = document.querySelector('input[name="entrega"]:checked').value;
+
+  if (entregaSelecionada === "domicilio") {
+    const cep = document.getElementById("cep").value.trim();
+    const rua = document.getElementById("rua").value.trim();
+    const numero = document.getElementById("numero").value.trim();
+    const bairro = document.getElementById("bairro").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const estado = document.getElementById("estado").value.trim();
+
+    if (!cep || !rua || !numero || !bairro || !cidade || !estado) {
+      alert("⚠️ Para ENTREGA EM DOMICÍLIO, é obrigatório preencher todo o endereço.");
+      return;
+    }
+  }
 
     const qMarrom = parseInt(document.getElementById("qty-marrom").value) || 0;
     const qCreme = parseInt(document.getElementById("qty-creme").value) || 0;
