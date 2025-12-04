@@ -436,6 +436,15 @@
     }
     updateSummary();
   });
+    
+// Controle de exibição das parcelas
+document.getElementById("pix").addEventListener("change", function () {
+  document.getElementById("parcelas-box").style.display = "none";
+});
+
+document.getElementById("cartao").addEventListener("change", function () {
+  document.getElementById("parcelas-box").style.display = "block";
+});
 
   // Enviar pedido
   document.getElementById("btn-send").addEventListener("click", () => {
