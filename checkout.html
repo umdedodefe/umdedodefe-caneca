@@ -377,34 +377,47 @@
     const estado = document.getElementById("estado").value.trim();
     const referencia = document.getElementById("referencia").value.trim();
 
-    // Monta mensagem
-    let lines = [];
-    if (revendedor && revendedor.nome) {
-      lines.push("Revendedor(a): " + revendedor.nome);
-    } else {
-      lines.push("Revendedor(a): —");
-    }
-    lines.push("Pedido:");
-    if (qCreme > 0) lines.push(`- Caneca Creme: ${qCreme} un. x ${toBRL(UNIT_PRICE)} = ${toBRL(qCreme * UNIT_PRICE)}`);
-    if (qMarrom > 0) lines.push(`- Caneca Marrom: ${qMarrom} un. x ${toBRL(UNIT_PRICE)} = ${toBRL(qMarrom * UNIT_PRICE)}`);
-    lines.push(`Subtotal: ${toBRL(subtotal)}`);
-    if (appliedCoupon) lines.push(`Cupom: ${appliedCoupon} (-${toBRL(desconto)})`);
-    lines.push(`Total: ${toBRL(total)}`);
-    lines.push(`Opção de entrega: ${entrega === "retirar" ? "Retirar no balcão" : "Entrega em domicílio (frete a calcular)"}`);
-    lines.push("");
-    lines.push("Dados do cliente:");
-    lines.push(`Nome: ${nome}`);
-    lines.push(`WhatsApp: ${whats}`);
-    lines.push(`Email: ${email}`);
-    if (telefone) lines.push(`Telefone: ${telefone}`);
-    lines.push("Endereço:");
-    lines.push(`CEP: ${cep}`);
-    lines.push(`Rua: ${rua}`);
-    lines.push(`Número: ${numero}`);
-    lines.push(`Bairro: ${bairro}`);
-    lines.push(`Cidade: ${cidade}`);
-    lines.push(`Estado: ${estado}`);
-    if (referencia) lines.push(`Ponto de referência: ${referencia}`);
+    // Monta mensagem (FORMATO FINAL AJUSTADO)
+let lines = [];
+
+const nomeFinalRevendedor = (revendedor && revendedor.nome) ? revendedor.nome : "Loja";
+
+// 1) Revendedor(a)
+lines.push(`*1) Revendedor(a):* *${nomeFinalRevendedor}*`);
+lines.push("");
+
+// 2) Total
+lines.push(`*2) Total:* *${toBRL(total)}*`);
+lines.push("");
+
+// 3) Opção de entrega com frete em negrito
+const entregaTexto = entrega === "retirar"
+  ? "Retirar no balcão"
+  : "Entrega em domicílio *(frete a calcular)*";
+
+lines.push(`3) Opção de entrega: ${entregaTexto}`);
+lines.push("");
+
+// Linha separadora
+lines.push("----------------------------");
+lines.push("");
+
+// 4) Dados do cliente (título em negrito)
+lines.push(`*4) Dados do cliente:*`);
+lines.push(`Nome: ${nome}`);
+lines.push(`WhatsApp: ${whats}`);
+lines.push(`Email: ${email}`);
+if (telefone) lines.push(`Telefone: ${telefone}`);
+
+// Endereço
+lines.push("Endereço:");
+lines.push(`CEP: ${cep}`);
+lines.push(`Rua: ${rua}`);
+lines.push(`Número: ${numero}`);
+lines.push(`Bairro: ${bairro}`);
+lines.push(`Cidade: ${cidade}`);
+lines.push(`Estado: ${estado}`);
+if (referencia) lines.push(`Ponto de referência: ${referencia}`);
 
     const mensagem = encodeURIComponent(lines.join("\n"));
     const waLink = `https://wa.me/${SALES_WHATS}?text=${mensagem}`;
