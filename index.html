@@ -63,7 +63,16 @@
         <h2 class="title-section">Um Dedo de Fé</h2>
         <p class="lead fw-semibold">Comece o dia com propósito!</p>
         <p>Nossa Caneca Devocional foi criada para acompanhar seus momentos de oração e reflexão, trazendo mensagens que fortalecem a fé e aquecem o coração. Perfeita para seu café da manhã com Deus ou para presentear alguém especial.</p>
-        <a class="btn btn-cta mt-3 botao-whatsapp" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
+        // Substituir lógica dos botões para apontar ao checkout.html (mantendo rev)
+document.querySelectorAll(".botao-whatsapp").forEach(botao => {
+  // Se a página tiver parâmetro rev, preservamos
+  const params = new URLSearchParams(window.location.search);
+  const revParam = params.get("rev");
+  let href = "checkout.html";
+  if (revParam) href += "?rev=" + encodeURIComponent(revParam);
+  botao.setAttribute("href", href);
+  botao.removeAttribute("target"); // abre na mesma aba (opcional). Pode manter _blank se preferir
+});
       </div>
     </div>
   </div>
@@ -141,7 +150,16 @@
         <p class="phrase-top">O melhor presente nesse Natal!</p>
         <p class="old-price">De R$60,00</p>
         <p class="new-price">Por R$50,00</p>
-        <a class="btn btn-cta mt-3 botao-whatsapp" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
+        // Substituir lógica dos botões para apontar ao checkout.html (mantendo rev)
+document.querySelectorAll(".botao-whatsapp").forEach(botao => {
+  // Se a página tiver parâmetro rev, preservamos
+  const params = new URLSearchParams(window.location.search);
+  const revParam = params.get("rev");
+  let href = "checkout.html";
+  if (revParam) href += "?rev=" + encodeURIComponent(revParam);
+  botao.setAttribute("href", href);
+  botao.removeAttribute("target"); // abre na mesma aba (opcional). Pode manter _blank se preferir
+});
       </div>
     </div>
   </div>
@@ -224,5 +242,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 </body>
 </html>
-
 
