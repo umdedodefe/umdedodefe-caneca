@@ -490,11 +490,7 @@ lines.push(
 );
 
     // Forma de pagamento
-if (formaPagamento === "PIX") {
-  lines.push(`Forma de pagamento: PIX`);
-} else {
-  lines.push(`Forma de pagamento: Cartão de Crédito - ${parcelas}`);
-}
+lines.push(`Forma de pagamento: ${formaPagamento}`);
 
 // 5) Linha separadora entre Entrega e Dados do cliente
 lines.push("");
