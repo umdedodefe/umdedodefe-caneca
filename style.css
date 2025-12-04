@@ -278,5 +278,9 @@ footer a:hover { text-decoration: underline; }
   justify-content: space-between;
 }
 
-
+/* Ajustes checkout */
+.checkout-container { padding: 5rem 0; background-color: #4D3821; color: #fff; }
+.product-card { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; }
+.summary-box { background: rgba(0,0,0,0.18); padding: 1rem; border-radius: 10px; color: #fff; }
+.btn-send { background: var(--brown-dark); color: #fff; border-radius: 8px; font-weight: 700; }
 
