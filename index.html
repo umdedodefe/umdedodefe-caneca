@@ -160,50 +160,34 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Script revendedor (fetch revendedores.json) -->
 <script>
-document.addEventListener("DOMContentLoaded", async () => {
-  // Número padrão do WhatsApp (edite aqui se precisar)
-  const NUMERO_WHATS = "5527999080664";
-
-  // Função auxiliar para carregar JSON de revendedores
-  async function loadRevendedores() {
-    try {
-      const res = await fetch('assets/revendedores.json', { cache: "no-store" });
-      if (!res.ok) throw new Error('JSON não encontrado');
-      return await res.json();
-    } catch (err) {
-      console.warn('Não foi possível carregar revendedores.json. Usando fallback.', err);
-      // Fallback mínimo (caso não haja JSON)
-      return {
-        "flavia": { "nome": "Flavia Quintino", "foto": "assets/revendedores/flavia.jpg" }
-      };
-    }
-  }
-
-  const revendedores = await loadRevendedores();
-
-  // Captura o parâmetro "rev" da URL
+document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
-  const revParam = params.get("rev");
+  const rev = params.get('rev');
 
-  if (revParam && revendedores[revParam]) {
-    const rev = revendedores[revParam];
+  if (!rev) return;
 
-    // Atualiza todos os botões WhatsApp da página
-    const mensagem = encodeURIComponent(`Quero a Caneca Devocional que a ${rev.nome} está divulgando.`);
-    document.querySelectorAll(".botao-whatsapp").forEach(botao => {
-      botao.setAttribute("href", `https://wa.me/${NUMERO_WHATS}?text=${mensagem}`);
+  try {
+    const res = await fetch('assets/revendedores.json', { cache: "no-store" });
+    const revs = await res.json();
+
+    if (!revs[rev]) return;
+
+    const revendedor = revs[rev];
+
+    // ✅ Atualiza todos os botões para checkout COM ?rev=
+    document.querySelectorAll('.botao-whatsapp').forEach(botao => {
+      botao.setAttribute('href', 'checkout.html?rev=' + encodeURIComponent(rev));
     });
 
-    // Mostra a foto e o nome no cabeçalho
+    // ✅ Exibe o revendedor no topo
     const container = document.querySelector(".revendedor-info");
     if (container) {
       container.innerHTML = "";
 
       const img = document.createElement("img");
-      img.src = rev.foto;
-      img.alt = rev.nome;
+      img.src = revendedor.foto;
+      img.alt = revendedor.nome;
       img.style.width = "50px";
       img.style.height = "50px";
       img.style.borderRadius = "50%";
@@ -211,16 +195,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       img.style.objectFit = "cover";
 
       const info = document.createElement("span");
-      info.textContent = `Revendedor(a) ${rev.nome}`;
+      info.textContent = "Revendedor(a) " + revendedor.nome;
       info.style.fontWeight = "600";
       info.style.fontSize = "16px";
 
       container.appendChild(img);
       container.appendChild(info);
     }
+
+  } catch (err) {
+    console.warn("Erro ao carregar revendedor:", err);
   }
 });
 </script>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   // Se a URL de entrada tiver ?rev=xxx, adicionar ao checkout.html?rev=xxx
@@ -246,4 +234,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
