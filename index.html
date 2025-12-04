@@ -48,7 +48,7 @@
   <img src="assets/logo-um-dedo-de-fe.png" class="logo-floating" alt="Logo Um Dedo de Fé">
   <div class="hero-content text-center">
     <p class="hero-phrase">Sua rotina muda quando Deus é prioridade.</p>
-    <a href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank" class="btn btn-cta btn-lg mt-3 botao-whatsapp">PEÇA JÁ A SUA</a>
+    <a href="checkout.html" class="btn btn-cta btn-lg mt-3 botao-whatsapp">PEÇA JÁ A SUA</a>
   </div>
 </section>
 
@@ -63,7 +63,7 @@
         <h2 class="title-section">Um Dedo de Fé</h2>
         <p class="lead fw-semibold">Comece o dia com propósito!</p>
         <p>Nossa Caneca Devocional foi criada para acompanhar seus momentos de oração e reflexão, trazendo mensagens que fortalecem a fé e aquecem o coração. Perfeita para seu café da manhã com Deus ou para presentear alguém especial.</p>
-        <a class="btn btn-cta mt-3 botao-whatsapp" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
+        <a class="btn btn-cta mt-3 botao-whatsapp" href="checkout.html">PEÇA JÁ A SUA</a>
       </div>
     </div>
   </div>
@@ -141,7 +141,7 @@
         <p class="phrase-top">O melhor presente nesse Natal!</p>
         <p class="old-price">De R$60,00</p>
         <p class="new-price">Por R$50,00</p>
-        <a class="btn btn-cta mt-3 botao-whatsapp" href="https://api.whatsapp.com/send?phone=5527999080664&text=Vi%20a%20Caneca%20Devocional%20no%20site%20e%20quero%20adquirir%20a%20minha." target="_blank">PEÇA JÁ A SUA</a>
+        <a class="btn btn-cta mt-3 botao-whatsapp" href="checkout.html">PEÇA JÁ A SUA</a>
       </div>
     </div>
   </div>
@@ -219,6 +219,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(info);
     }
   }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Se a URL de entrada tiver ?rev=xxx, adicionar ao checkout.html?rev=xxx
+  const params = new URLSearchParams(window.location.search);
+  const rev = params.get('rev');
+  if (!rev) return;
+
+  document.querySelectorAll('.botao-whatsapp').forEach(a => {
+    // Se o link já apontar para checkout.html, anexa ?rev=...
+    try {
+      const href = a.getAttribute('href') || '';
+      // Evita duplicar caso já tenha ?rev=...
+      const base = href.split('?')[0];
+      if (base.endsWith('checkout.html')) {
+        a.setAttribute('href', base + '?rev=' + encodeURIComponent(rev));
+      }
+    } catch (e) {
+      console.warn('Erro ao ajustar link revendedor', e);
+    }
+  });
 });
 </script>
 
