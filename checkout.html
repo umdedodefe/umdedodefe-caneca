@@ -531,7 +531,8 @@ if (qMarrom > 0) lines.push(`- Caneca Marrom: ${qMarrom} un. x ${toBRL(UNIT_PRIC
 
 lines.push(`Subtotal: ${toBRL(subtotal)}`);
 
-if (appliedCoupon) lines.push(`Cupom: ${appliedCoupon} (-${toBRL(desconto)})`);
+if (appliedCoupon && appliedCoupon.code)  
+  lines.push(`Cupom: ${appliedCoupon.code} (-${toBRL(desconto)})`);
 
 // 2) Total — título e valor em negrito
 lines.push(`*Total:* *${toBRL(total)}*`);
