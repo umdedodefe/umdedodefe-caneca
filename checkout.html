@@ -272,7 +272,6 @@ const UNIT_PRICE = 50.00; // R$50,00 por unit (se quiser variação, ajustar)
 
 // Cupons EXCLUSIVOS do site oficial (só funcionam sem ?rev=...)
 const COUPONS_OFFICIAL_ONLY = {
-  "DEVOCIONAL10": 0.10,
   "NATAL20": 0.20
 };
 
@@ -287,6 +286,9 @@ let stock = { marrom: 0, creme: 0 };
 
 // appliedCoupon será um objeto { code: "NOME", discount: 0.10 } quando aplicado
 let appliedCoupon = null;
+
+// variável que será preenchida pela função loadRevendedorFromURL()
+let revendedor = null;
 
 // revendedor é preenchido pela função loadRevendedorFromURL() mais abaixo.
 // Para a lógica de validação de cupom, vamos detectar se a URL tem ?rev=...
