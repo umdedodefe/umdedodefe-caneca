@@ -267,105 +267,14 @@
 
   <script>
   // Configurações
-const SALES_WHATS = "5527999080664"; // número padrão
-const UNIT_PRICE = 50.00; // R$50,00 por unit (se quiser variação, ajustar)
+  const SALES_WHATS = "5527999080664"; // número padrão
+  const UNIT_PRICE = 50.00; // R$50,00 por unit (se quiser variação, ajustar)
+  const VALID_COUPONS = { "DEVOCIONAL10": 0.10, "NATAL10": 0.10 }; // 10% de desconto
 
-// Cupons EXCLUSIVOS do site oficial (só funcionam sem ?rev=...)
-const COUPONS_OFFICIAL_ONLY = {
-  "NATAL20": 0.20
-};
-
-// Cupons liberados para revendedores (funcionam tanto no site oficial quanto em ?rev=...)
-const COUPONS_LIBERADOS = {
-  "DEVOCIONAL10": 0.10,
-  "BRINDE5": 0.05
-};
-
-// Estado da página
-let stock = { marrom: 0, creme: 0 };
-// Detecta se é página de revendedor (?rev=nome)
-const urlParams = new URLSearchParams(window.location.search);
-const isRevendedor = urlParams.has("rev");
-
-// Função para validar cupom conforme origem
-function validarCupom(cupom) {
-  const cup = cupom.toUpperCase();
-
-  // CUPONS QUE FUNCIONAM EM TODOS OS LUGARES
-  if (COUPONS_LIBERADOS[cup]) {
-    return { valido: true, desconto: COUPONS_LIBERADOS[cup], motivo: "liberado" };
-  }
-
-  // CUPONS EXCLUSIVOS DO SITE OFICIAL
-  if (COUPONS_OFFICIAL_ONLY[cup]) {
-    if (isRevendedor) {
-      return { valido: false, motivo: "exclusivo_oficial" };
-    } else {
-      return { valido: true, desconto: COUPONS_OFFICIAL_ONLY[cup], motivo: "oficial" };
-    }
-  }
-
-  // Cupom não existe
-  return { valido: false, motivo: "inexistente" };
-}
-
-// appliedCoupon será um objeto { code: "NOME", discount: 0.10 } quando aplicado
-let appliedCoupon = null;
-// appliedCoupon será um objeto { code: "NOME", discount: 0.10... }
-let appliedCoupon = null;
-
-// Detecta se a página é de revendedor
-const urlParams = new URLSearchParams(window.location.search);
-const isRevendedor = urlParams.has("rev");
-
-// Função para aplicar o cupom
-document.getElementById("apply-coupon").addEventListener("click", () => {
-  const code = document.getElementById("coupon").value.trim().toUpperCase();
-  const msgBox = document.getElementById("coupon-msg");
-  
-  msgBox.style.display = "none";
-  msgBox.textContent = "";
-
-  // 1 — Verifica se é cupom exclusivo do site
-  if (COUPONS_OFFICIAL_ONLY[code]) {
-    if (isRevendedor) {
-      msgBox.textContent = "Este cupom só pode ser usado no site oficial.";
-      msgBox.style.display = "block";
-      appliedCoupon = null;
-      updateSummary();
-      return;
-    } else {
-      appliedCoupon = { code: code, discount: COUPONS_OFFICIAL_ONLY[code] };
-      updateSummary();
-      msgBox.textContent = "Cupom aplicado com sucesso!";
-      msgBox.style.display = "block";
-      return;
-    }
-  }
-
-  // 2 — Verifica se é cupom liberado para todos
-  if (COUPONS_LIBERADOS[code]) {
-    appliedCoupon = { code: code, discount: COUPONS_LIBERADOS[code] };
-    updateSummary();
-    msgBox.textContent = "Cupom aplicado com sucesso!";
-    msgBox.style.display = "block";
-    return;
-  }
-
-  // 3 — Cupom não existe
-  msgBox.textContent = "Cupom inválido.";
-  msgBox.style.display = "block";
-  appliedCoupon = null;
-  updateSummary();
-});
-
-// variável que será preenchida pela função loadRevendedorFromURL()
-let revendedor = null;
-
-// revendedor é preenchido pela função loadRevendedorFromURL() mais abaixo.
-// Para a lógica de validação de cupom, vamos detectar se a URL tem ?rev=...
-const urlParams = new URLSearchParams(window.location.search);
-const IS_REVENDEDOR = urlParams.get("rev") !== null; // true se URL contém ?rev=...
+  // Estado da página
+  let stock = { marrom: 0, creme: 0 };
+  let appliedCoupon = null;
+  let revendedor = null;
 
   // Util helpers
   const toBRL = (v) => "R$" + v.toFixed(2).replace(".", ",");
@@ -417,26 +326,22 @@ const IS_REVENDEDOR = urlParams.get("rev") !== null; // true se URL contém ?rev
   }
 
   // Cálculos
- function updateSummary() {
-  const qMarrom = parseInt(document.getElementById("qty-marrom").value) || 0;
-  const qCreme = parseInt(document.getElementById("qty-creme").value) || 0;
-  document.getElementById("sum-marrom").textContent = qMarrom;
-  document.getElementById("sum-creme").textContent = qCreme;
+  function updateSummary() {
+    const qMarrom = parseInt(document.getElementById("qty-marrom").value) || 0;
+    const qCreme = parseInt(document.getElementById("qty-creme").value) || 0;
+    document.getElementById("sum-marrom").textContent = qMarrom;
+    document.getElementById("sum-creme").textContent = qCreme;
 
-  const subtotal = (qMarrom + qCreme) * UNIT_PRICE;
-  let desconto = 0;
-
-  // appliedCoupon agora é um objeto { code, discount } ou null
-  if (appliedCoupon && typeof appliedCoupon.discount === "number") {
-    desconto = subtotal * appliedCoupon.discount;
+    let subtotal = (qMarrom + qCreme) * UNIT_PRICE;
+    let desconto = 0;
+    if (appliedCoupon && VALID_COUPONS[appliedCoupon]) {
+      desconto = subtotal * VALID_COUPONS[appliedCoupon];
+    }
+    const total = subtotal - desconto;
+    document.getElementById("subtotal").textContent = toBRL(subtotal);
+    document.getElementById("desconto").textContent = toBRL(desconto);
+    document.getElementById("total").textContent = toBRL(total);
   }
-
-  const total = subtotal - desconto;
-  document.getElementById("subtotal").textContent = toBRL(subtotal);
-  document.getElementById("desconto").textContent = toBRL(desconto);
-  document.getElementById("total").textContent = toBRL(total);
-}
-
 
   function showFieldError(id, msg) {
     const el = document.getElementById(id);
@@ -472,63 +377,25 @@ const IS_REVENDEDOR = urlParams.get("rev") !== null; // true se URL contém ?rev
 
   // Aplicar cupom
   document.getElementById("apply-coupon").addEventListener("click", () => {
-  const input = document.getElementById("coupon").value.trim().toUpperCase();
-  const msgEl = document.getElementById("coupon-msg");
-  msgEl.style.display = "none";
-  msgEl.textContent = "";
-
-  if (!input) {
-    msgEl.style.display = "block";
-    msgEl.style.color = "#ffcccb";
-    msgEl.textContent = "Insira um cupom.";
-    appliedCoupon = null;
-    updateSummary();
-    return;
-  }
-
-  // Se veio por revendedor (?rev=...), só aceita COUPONS_LIBERADOS
-  if (IS_REVENDEDOR) {
-    if (COUPONS_LIBERADOS[input]) {
-      appliedCoupon = { code: input, discount: COUPONS_LIBERADOS[input] };
-      msgEl.style.display = "block";
-      msgEl.style.color = "#b6f3c6";
-      msgEl.textContent = "Cupom aplicado com sucesso!";
+    const code = document.getElementById("coupon").value.trim().toUpperCase();
+    const msgEl = document.getElementById("coupon-msg");
+    if (!code) {
+      msgEl.style.display = "block"; msgEl.textContent = "Insira um cupom.";
+      appliedCoupon = null;
+      updateSummary();
+      return;
+    }
+    if (VALID_COUPONS[code]) {
+      appliedCoupon = code;
+      msgEl.style.display = "block"; msgEl.style.color = "#b6f3c6";
+      msgEl.textContent = "Cupom aplicado: " + code + " (10% de desconto)";
     } else {
       appliedCoupon = null;
-      msgEl.style.display = "block";
-      msgEl.style.color = "#ffcccb";
-      msgEl.textContent = "Este cupom só pode ser usado no site oficial.";
+      msgEl.style.display = "block"; msgEl.style.color = "#ffcccb";
+      msgEl.textContent = "Cupom inválido.";
     }
     updateSummary();
-    return;
-  }
-
-  // Se não for revendedor (site oficial) — aceita cupons oficiais e liberados
-  if (COUPONS_OFFICIAL_ONLY[input]) {
-    appliedCoupon = { code: input, discount: COUPONS_OFFICIAL_ONLY[input] };
-    msgEl.style.display = "block";
-    msgEl.style.color = "#b6f3c6";
-    msgEl.textContent = "Cupom aplicado com sucesso!";
-    updateSummary();
-    return;
-  }
-
-  if (COUPONS_LIBERADOS[input]) {
-    appliedCoupon = { code: input, discount: COUPONS_LIBERADOS[input] };
-    msgEl.style.display = "block";
-    msgEl.style.color = "#b6f3c6";
-    msgEl.textContent = "Cupom aplicado com sucesso!";
-    updateSummary();
-    return;
-  }
-
-  // Cupom inválido
-  appliedCoupon = null;
-  msgEl.style.display = "block";
-  msgEl.style.color = "#ffcccb";
-  msgEl.textContent = "Cupom inválido.";
-  updateSummary();
-});
+  });
 
   // Observadores de quantidade
   document.getElementById("qty-marrom").addEventListener("input", (e) => {
@@ -571,9 +438,7 @@ const IS_REVENDEDOR = urlParams.get("rev") !== null; // true se URL contém ?rev
     const qMarrom = parseInt(document.getElementById("qty-marrom").value) || 0;
     const qCreme = parseInt(document.getElementById("qty-creme").value) || 0;
     const subtotal = (qMarrom + qCreme) * UNIT_PRICE;
-    const desconto = (appliedCoupon && typeof appliedCoupon.discount === "number")  
-  ? subtotal * appliedCoupon.discount  
-  : 0;
+    const desconto = appliedCoupon ? subtotal * VALID_COUPONS[appliedCoupon] : 0;
     const total = subtotal - desconto;
     const entrega = document.querySelector('input[name="entrega"]:checked').value;
     const formaPagamento = document.querySelector('input[name="pagamento"]:checked').value;
@@ -605,8 +470,7 @@ if (qMarrom > 0) lines.push(`- Caneca Marrom: ${qMarrom} un. x ${toBRL(UNIT_PRIC
 
 lines.push(`Subtotal: ${toBRL(subtotal)}`);
 
-if (appliedCoupon && appliedCoupon.code)  
-  lines.push(`Cupom: ${appliedCoupon.code} (-${toBRL(desconto)})`);
+if (appliedCoupon) lines.push(`Cupom: ${appliedCoupon} (-${toBRL(desconto)})`);
 
 // 2) Total — título e valor em negrito
 lines.push(`*Total:* *${toBRL(total)}*`);
@@ -687,5 +551,75 @@ document.getElementById("cep").addEventListener("blur", async function () {
     document.getElementById("price-creme").textContent = toBRL(UNIT_PRICE);
   })();
   </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Detecta revendedor
+  const params = new URLSearchParams(window.location.search);
+  const isRevendedor = params.has("rev"); // true = revendedor / false = site oficial
+
+  // Elementos do DOM
+  const cupomInput = document.getElementById("cupom");
+  const cupomBtn = document.getElementById("aplicar-cupom");
+  const cupomMsg = document.getElementById("cupom-mensagem");
+
+  // Valores dos cupons
+  const cupons = {
+    "NATAL20": {
+      desconto: 0.20,
+      somenteOficial: true
+    },
+    "DEVOCIONAL10": {
+      desconto: 0.10,
+      somenteOficial: false
+    }
+  };
+
+  // Cálculo do valor total (AJUSTE AQUI SE NECESSÁRIO)
+  function atualizarTotal(descontoAplicado = 0) {
+    const totalSpan = document.getElementById("total-final");
+
+    let totalBase = window.totalBase || 0;
+    let totalComDesconto = totalBase - (totalBase * descontoAplicado);
+
+    totalSpan.textContent = "R$ " + totalComDesconto.toFixed(2).replace(".", ",");
+  }
+
+  // Clique no botão aplicar cupom
+  cupomBtn.addEventListener("click", () => {
+    const codigo = cupomInput.value.trim().toUpperCase();
+
+    if (!codigo) {
+      cupomMsg.textContent = "Digite um cupom válido.";
+      cupomMsg.style.color = "#ffdddd";
+      return;
+    }
+
+    const cupom = cupons[codigo];
+
+    if (!cupom) {
+      cupomMsg.textContent = "Cupom inválido.";
+      cupomMsg.style.color = "#ffdddd";
+      return;
+    }
+
+    // ❌ BLOQUEIA cupom NATAL20 em links de revendedor
+    if (cupom.somenteOficial && isRevendedor) {
+      cupomMsg.textContent = "Este cupom só pode ser usado no site oficial.";
+      cupomMsg.style.color = "#ffdddd";
+      return;
+    }
+
+    // ✔ Aplicar desconto normalmente
+    window.descontoAtual = cupom.desconto;
+
+    cupomMsg.textContent = "Cupom aplicado com sucesso! (" + (cupom.desconto * 100) + "% OFF)";
+    cupomMsg.style.color = "#b6ffb0";
+
+    atualizarTotal(cupom.desconto);
+  });
+
+});
+</script>
 </body>
 </html>
