@@ -311,6 +311,53 @@ function validarCupom(cupom) {
 
 // appliedCoupon será um objeto { code: "NOME", discount: 0.10 } quando aplicado
 let appliedCoupon = null;
+// appliedCoupon será um objeto { code: "NOME", discount: 0.10... }
+let appliedCoupon = null;
+
+// Detecta se a página é de revendedor
+const urlParams = new URLSearchParams(window.location.search);
+const isRevendedor = urlParams.has("rev");
+
+// Função para aplicar o cupom
+document.getElementById("apply-coupon").addEventListener("click", () => {
+  const code = document.getElementById("coupon").value.trim().toUpperCase();
+  const msgBox = document.getElementById("coupon-msg");
+  
+  msgBox.style.display = "none";
+  msgBox.textContent = "";
+
+  // 1 — Verifica se é cupom exclusivo do site
+  if (COUPONS_OFFICIAL_ONLY[code]) {
+    if (isRevendedor) {
+      msgBox.textContent = "Este cupom só pode ser usado no site oficial.";
+      msgBox.style.display = "block";
+      appliedCoupon = null;
+      updateSummary();
+      return;
+    } else {
+      appliedCoupon = { code: code, discount: COUPONS_OFFICIAL_ONLY[code] };
+      updateSummary();
+      msgBox.textContent = "Cupom aplicado com sucesso!";
+      msgBox.style.display = "block";
+      return;
+    }
+  }
+
+  // 2 — Verifica se é cupom liberado para todos
+  if (COUPONS_LIBERADOS[code]) {
+    appliedCoupon = { code: code, discount: COUPONS_LIBERADOS[code] };
+    updateSummary();
+    msgBox.textContent = "Cupom aplicado com sucesso!";
+    msgBox.style.display = "block";
+    return;
+  }
+
+  // 3 — Cupom não existe
+  msgBox.textContent = "Cupom inválido.";
+  msgBox.style.display = "block";
+  appliedCoupon = null;
+  updateSummary();
+});
 
 // variável que será preenchida pela função loadRevendedorFromURL()
 let revendedor = null;
