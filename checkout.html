@@ -398,25 +398,63 @@ const IS_REVENDEDOR = urlParams.get("rev") !== null; // true se URL contém ?rev
 
   // Aplicar cupom
   document.getElementById("apply-coupon").addEventListener("click", () => {
-    const code = document.getElementById("coupon").value.trim().toUpperCase();
-    const msgEl = document.getElementById("coupon-msg");
-    if (!code) {
-      msgEl.style.display = "block"; msgEl.textContent = "Insira um cupom.";
-      appliedCoupon = null;
-      updateSummary();
-      return;
-    }
-    if (VALID_COUPONS[code]) {
-      appliedCoupon = code;
-      msgEl.style.display = "block"; msgEl.style.color = "#b6f3c6";
-      msgEl.textContent = "Cupom aplicado: " + code + " (10% de desconto)";
+  const input = document.getElementById("coupon").value.trim().toUpperCase();
+  const msgEl = document.getElementById("coupon-msg");
+  msgEl.style.display = "none";
+  msgEl.textContent = "";
+
+  if (!input) {
+    msgEl.style.display = "block";
+    msgEl.style.color = "#ffcccb";
+    msgEl.textContent = "Insira um cupom.";
+    appliedCoupon = null;
+    updateSummary();
+    return;
+  }
+
+  // Se veio por revendedor (?rev=...), só aceita COUPONS_LIBERADOS
+  if (IS_REVENDEDOR) {
+    if (COUPONS_LIBERADOS[input]) {
+      appliedCoupon = { code: input, discount: COUPONS_LIBERADOS[input] };
+      msgEl.style.display = "block";
+      msgEl.style.color = "#b6f3c6";
+      msgEl.textContent = "Cupom aplicado com sucesso!";
     } else {
       appliedCoupon = null;
-      msgEl.style.display = "block"; msgEl.style.color = "#ffcccb";
-      msgEl.textContent = "Cupom inválido.";
+      msgEl.style.display = "block";
+      msgEl.style.color = "#ffcccb";
+      msgEl.textContent = "Este cupom só pode ser usado no site oficial.";
     }
     updateSummary();
-  });
+    return;
+  }
+
+  // Se não for revendedor (site oficial) — aceita cupons oficiais e liberados
+  if (COUPONS_OFFICIAL_ONLY[input]) {
+    appliedCoupon = { code: input, discount: COUPONS_OFFICIAL_ONLY[input] };
+    msgEl.style.display = "block";
+    msgEl.style.color = "#b6f3c6";
+    msgEl.textContent = "Cupom aplicado com sucesso!";
+    updateSummary();
+    return;
+  }
+
+  if (COUPONS_LIBERADOS[input]) {
+    appliedCoupon = { code: input, discount: COUPONS_LIBERADOS[input] };
+    msgEl.style.display = "block";
+    msgEl.style.color = "#b6f3c6";
+    msgEl.textContent = "Cupom aplicado com sucesso!";
+    updateSummary();
+    return;
+  }
+
+  // Cupom inválido
+  appliedCoupon = null;
+  msgEl.style.display = "block";
+  msgEl.style.color = "#ffcccb";
+  msgEl.textContent = "Cupom inválido.";
+  updateSummary();
+});
 
   // Observadores de quantidade
   document.getElementById("qty-marrom").addEventListener("input", (e) => {
