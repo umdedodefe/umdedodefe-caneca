@@ -283,6 +283,31 @@ const COUPONS_LIBERADOS = {
 
 // Estado da página
 let stock = { marrom: 0, creme: 0 };
+// Detecta se é página de revendedor (?rev=nome)
+const urlParams = new URLSearchParams(window.location.search);
+const isRevendedor = urlParams.has("rev");
+
+// Função para validar cupom conforme origem
+function validarCupom(cupom) {
+  const cup = cupom.toUpperCase();
+
+  // CUPONS QUE FUNCIONAM EM TODOS OS LUGARES
+  if (COUPONS_LIBERADOS[cup]) {
+    return { valido: true, desconto: COUPONS_LIBERADOS[cup], motivo: "liberado" };
+  }
+
+  // CUPONS EXCLUSIVOS DO SITE OFICIAL
+  if (COUPONS_OFFICIAL_ONLY[cup]) {
+    if (isRevendedor) {
+      return { valido: false, motivo: "exclusivo_oficial" };
+    } else {
+      return { valido: true, desconto: COUPONS_OFFICIAL_ONLY[cup], motivo: "oficial" };
+    }
+  }
+
+  // Cupom não existe
+  return { valido: false, motivo: "inexistente" };
+}
 
 // appliedCoupon será um objeto { code: "NOME", discount: 0.10 } quando aplicado
 let appliedCoupon = null;
