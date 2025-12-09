@@ -265,11 +265,12 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
+    <script>
   // Configurações
   const SALES_WHATS = "5527999080664"; // número padrão
-  const UNIT_PRICE = 50.00; // R$50,00 por unit (se quiser variação, ajustar)
-  const VALID_COUPONS = { "DEVOCIONAL10": 0.10, "NATAL10": 0.10 }; // 10% de desconto
+  const UNIT_PRICE = 50.00; // R$50,00 por unit
+  // Ajuste: validamos DEVOCIONAL10 e NATAL20 (20%)
+  const VALID_COUPONS = { "DEVOCIONAL10": 0.10, "NATAL20": 0.20 };
 
   // Estado da página
   let stock = { marrom: 0, creme: 0 };
@@ -278,6 +279,15 @@
 
   // Util helpers
   const toBRL = (v) => "R$" + v.toFixed(2).replace(".", ",");
+
+  // Helper: verifica se a URL tem parâmetro rev (qualquer valor)
+  function hasRevParam() {
+    try {
+      return new URLSearchParams(window.location.search).has("rev");
+    } catch (e) {
+      return false;
+    }
+  }
 
   // Carregar estoque e revendedores
   async function loadStock() {
@@ -299,6 +309,7 @@
       const revs = res.ok ? await res.json() : {};
       const params = new URLSearchParams(window.location.search);
       const revParam = params.get("rev");
+      // Mantemos o comportamento atual: só preenche revendedor se estiver no JSON
       if (revParam && revs[revParam]) {
         revendedor = revs[revParam];
         const container = document.querySelector(".revendedor-info");
@@ -375,23 +386,37 @@
     return ok;
   }
 
-  // Aplicar cupom
+  // Aplicar cupom — agora considera se veio por revendedor
   document.getElementById("apply-coupon").addEventListener("click", () => {
     const code = document.getElementById("coupon").value.trim().toUpperCase();
     const msgEl = document.getElementById("coupon-msg");
+    msgEl.style.display = "block";
+    msgEl.style.color = "#ffcccb"; // cor padrão de erro (muda abaixo se ok)
+
     if (!code) {
-      msgEl.style.display = "block"; msgEl.textContent = "Insira um cupom.";
+      msgEl.textContent = "Insira um cupom.";
       appliedCoupon = null;
       updateSummary();
       return;
     }
+
+    // Se for NATAL20 e houve rev param, não permite
+    if (code === "NATAL20" && hasRevParam()) {
+      appliedCoupon = null;
+      msgEl.style.color = "#ffcccb";
+      msgEl.textContent = "O cupom NATAL20 não é válido em links de revendedores.";
+      updateSummary();
+      return;
+    }
+
     if (VALID_COUPONS[code]) {
       appliedCoupon = code;
-      msgEl.style.display = "block"; msgEl.style.color = "#b6f3c6";
-      msgEl.textContent = "Cupom aplicado: " + code + " (10% de desconto)";
+      const percent = Math.round(VALID_COUPONS[code] * 100);
+      msgEl.style.color = "#b6f3c6"; // cor de sucesso
+      msgEl.textContent = `Cupom aplicado: ${code} (${percent}% de desconto)`;
     } else {
       appliedCoupon = null;
-      msgEl.style.display = "block"; msgEl.style.color = "#ffcccb";
+      msgEl.style.color = "#ffcccb";
       msgEl.textContent = "Cupom inválido.";
     }
     updateSummary();
@@ -514,32 +539,31 @@ if (referencia) lines.push(`Ponto de referência: ${referencia}`);
     // Abre whatsapp
     window.open(waLink, "_blank");
   });
-// ===============================
-// AUTOPREENCHIMENTO VIA CEP
-// ===============================
-document.getElementById("cep").addEventListener("blur", async function () {
-  const cep = this.value.replace(/\D/g, "");
 
-  if (cep.length !== 8) return;
+  // AUTOPREENCHIMENTO VIA CEP
+  document.getElementById("cep").addEventListener("blur", async function () {
+    const cep = this.value.replace(/\D/g, "");
 
-  try {
-    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-    const data = await res.json();
+    if (cep.length !== 8) return;
 
-    if (data.erro) {
-      alert("CEP não encontrado.");
-      return;
+    try {
+      const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await res.json();
+
+      if (data.erro) {
+        alert("CEP não encontrado.");
+        return;
+      }
+
+      document.getElementById("rua").value = data.logradouro || "";
+      document.getElementById("bairro").value = data.bairro || "";
+      document.getElementById("cidade").value = data.localidade || "";
+      document.getElementById("estado").value = data.uf || "";
+
+    } catch (e) {
+      alert("Erro ao buscar CEP. Verifique sua conexão.");
     }
-
-    document.getElementById("rua").value = data.logradouro || "";
-    document.getElementById("bairro").value = data.bairro || "";
-    document.getElementById("cidade").value = data.localidade || "";
-    document.getElementById("estado").value = data.uf || "";
-
-  } catch (e) {
-    alert("Erro ao buscar CEP. Verifique sua conexão.");
-  }
-});
+  });
 
   // Inicialização
   (async function init() {
@@ -551,5 +575,3 @@ document.getElementById("cep").addEventListener("blur", async function () {
     document.getElementById("price-creme").textContent = toBRL(UNIT_PRICE);
   })();
   </script>
-</body>
-</html>
