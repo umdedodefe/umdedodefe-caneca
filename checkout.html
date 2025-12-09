@@ -343,22 +343,26 @@ const IS_REVENDEDOR = urlParams.get("rev") !== null; // true se URL contém ?rev
   }
 
   // Cálculos
-  function updateSummary() {
-    const qMarrom = parseInt(document.getElementById("qty-marrom").value) || 0;
-    const qCreme = parseInt(document.getElementById("qty-creme").value) || 0;
-    document.getElementById("sum-marrom").textContent = qMarrom;
-    document.getElementById("sum-creme").textContent = qCreme;
+ function updateSummary() {
+  const qMarrom = parseInt(document.getElementById("qty-marrom").value) || 0;
+  const qCreme = parseInt(document.getElementById("qty-creme").value) || 0;
+  document.getElementById("sum-marrom").textContent = qMarrom;
+  document.getElementById("sum-creme").textContent = qCreme;
 
-    let subtotal = (qMarrom + qCreme) * UNIT_PRICE;
-    let desconto = 0;
-    if (appliedCoupon && VALID_COUPONS[appliedCoupon]) {
-      desconto = subtotal * VALID_COUPONS[appliedCoupon];
-    }
-    const total = subtotal - desconto;
-    document.getElementById("subtotal").textContent = toBRL(subtotal);
-    document.getElementById("desconto").textContent = toBRL(desconto);
-    document.getElementById("total").textContent = toBRL(total);
+  const subtotal = (qMarrom + qCreme) * UNIT_PRICE;
+  let desconto = 0;
+
+  // appliedCoupon agora é um objeto { code, discount } ou null
+  if (appliedCoupon && typeof appliedCoupon.discount === "number") {
+    desconto = subtotal * appliedCoupon.discount;
   }
+
+  const total = subtotal - desconto;
+  document.getElementById("subtotal").textContent = toBRL(subtotal);
+  document.getElementById("desconto").textContent = toBRL(desconto);
+  document.getElementById("total").textContent = toBRL(total);
+}
+
 
   function showFieldError(id, msg) {
     const el = document.getElementById(id);
