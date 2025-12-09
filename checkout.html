@@ -497,7 +497,9 @@ const IS_REVENDEDOR = urlParams.get("rev") !== null; // true se URL contém ?rev
     const qMarrom = parseInt(document.getElementById("qty-marrom").value) || 0;
     const qCreme = parseInt(document.getElementById("qty-creme").value) || 0;
     const subtotal = (qMarrom + qCreme) * UNIT_PRICE;
-    const desconto = appliedCoupon ? subtotal * VALID_COUPONS[appliedCoupon] : 0;
+    const desconto = (appliedCoupon && typeof appliedCoupon.discount === "number")  
+  ? subtotal * appliedCoupon.discount  
+  : 0;
     const total = subtotal - desconto;
     const entrega = document.querySelector('input[name="entrega"]:checked').value;
     const formaPagamento = document.querySelector('input[name="pagamento"]:checked').value;
