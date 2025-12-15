@@ -462,6 +462,12 @@ src="https://www.facebook.com/tr?id=643603256992913&ev=PageView&noscript=1"/>
     
   // Enviar pedido
   document.getElementById("btn-send").addEventListener("click", () => {
+    
+    // 🔥 Evento Meta Pixel - Lead
+if (typeof fbq === "function") {
+  fbq('track', 'Lead');
+}
+
     if (!validateForm()) return;
     
       const entregaSelecionada = document.querySelector('input[name="entrega"]:checked').value;
