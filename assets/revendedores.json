@@ -158,5 +158,9 @@
     "jocilenelopes": {
     "nome": "Jocilene Lopes",
     "foto": "assets/revendedores/jocilenelopes.jpg"
+  },
+    "lipebarretto": {
+    "nome": "Lipe Barretto",
+    "foto": "assets/revendedores/lipebarretto.jpg"
   }
 }
