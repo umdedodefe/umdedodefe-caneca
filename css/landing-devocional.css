@@ -45,17 +45,6 @@
   margin-bottom: 1rem;
 }
 
-.lp-small {
-  display: inline-block;
-  font-weight: 700;
-  letter-spacing: 2px;
-  background: #3B2A1A;
-  color: #fff;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-}
-
 /* Imagem do título */
 .lp-title-img {
   max-width: 420px;
