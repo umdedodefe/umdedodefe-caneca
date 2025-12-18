@@ -63,6 +63,13 @@
   margin: 0;
 }
 
+/* Imagem do título */
+.lp-title-img {
+  max-width: 420px;
+  height: auto;
+  display: block;
+}
+
 /* Texto */
 .lp-text {
   font-size: 1.1rem;
@@ -93,23 +100,7 @@
   font-size: 0.95rem;
 }
 
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .lp-wrapper {
-    text-align: center;
-    padding-top: 6rem;
-  }
-
-  .circle-bg {
-    width: 260px;
-    height: 260px;
-  }
-
-  .lp-title h1 {
-    font-size: 2.2rem;
-  }
-  
-  /* =========================
+/* =========================
    RESPONSIVO MOBILE
 ========================= */
 @media (max-width: 768px) {
@@ -124,17 +115,13 @@
     height: 260px;
   }
 
-  .lp-title h1 {
-    font-size: 2.2rem;
-  }
-
   /* 🔑 container do texto vira flex */
   .lp-content {
     display: flex;
     flex-direction: column;
   }
 
-  /* ORDEM CORRETA */
+  /* ORDEM MOBILE */
   .lp-title {
     order: 1;
   }
@@ -159,5 +146,12 @@
   .lp-author {
     order: 5;
     text-align: center;
+  }
+
+  /* Imagem do título no mobile */
+  .lp-title-img {
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
