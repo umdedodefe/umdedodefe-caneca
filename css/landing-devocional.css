@@ -56,13 +56,6 @@
   margin-bottom: 0.5rem;
 }
 
-.lp-title h1 {
-  font-weight: 800;
-  font-size: 3rem;
-  line-height: 1.1;
-  margin: 0;
-}
-
 /* Imagem do título */
 .lp-title-img {
   max-width: 420px;
