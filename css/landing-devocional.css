@@ -109,24 +109,45 @@
     font-size: 2.2rem;
   }
   
-  /* ===== ORDEM MOBILE ===== */
+  /* =========================
+   RESPONSIVO MOBILE
+========================= */
 @media (max-width: 768px) {
 
-  .lp-wrapper .row {
+  .lp-wrapper {
+    text-align: center;
+    padding-top: 6rem;
+  }
+
+  .circle-bg {
+    width: 260px;
+    height: 260px;
+  }
+
+  .lp-title h1 {
+    font-size: 2.2rem;
+  }
+
+  /* 🔑 container do texto vira flex */
+  .lp-content {
     display: flex;
     flex-direction: column;
   }
 
+  /* ORDEM CORRETA */
   .lp-title {
     order: 1;
   }
 
   .lp-text {
     order: 2;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .lp-btn {
     order: 3;
+    align-self: center;
     margin-bottom: 2rem;
   }
 
@@ -137,12 +158,6 @@
 
   .lp-author {
     order: 5;
-  }
-}
-
-
-  .lp-text {
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center;
   }
 }
