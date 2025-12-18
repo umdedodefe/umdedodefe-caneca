@@ -1,0 +1,116 @@
+/* RESET BÁSICO */
+.lp-page {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #EFE7DF;
+  color: #3B2A1A;
+  margin: 0;
+}
+
+/* Wrapper */
+.lp-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 1rem;
+}
+
+/* Imagem */
+.lp-image {
+  position: relative;
+  text-align: center;
+}
+
+.lp-image img {
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Círculo */
+.circle-bg {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  background-color: #9A5B45;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* Título */
+.lp-title {
+  margin-bottom: 1rem;
+}
+
+.lp-small {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: #3B2A1A;
+  color: #fff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.lp-title h1 {
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* Texto */
+.lp-text {
+  font-size: 1.1rem;
+  max-width: 520px;
+  margin-top: 1rem;
+}
+
+/* Botão */
+.lp-btn {
+  display: inline-block;
+  margin-top: 1.8rem;
+  background-color: #B3672A;
+  color: #fff;
+  padding: 0.9rem 2.2rem;
+  border-radius: 40px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lp-btn:hover {
+  background-color: #3B2A1A;
+  color: #fff;
+}
+
+/* Autor */
+.lp-author {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .lp-wrapper {
+    text-align: center;
+    padding-top: 6rem;
+  }
+
+  .circle-bg {
+    width: 260px;
+    height: 260px;
+  }
+
+  .lp-title h1 {
+    font-size: 2.2rem;
+  }
+
+  .lp-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
