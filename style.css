@@ -335,3 +335,31 @@ footer a:hover { text-decoration: underline; }
     max-width: 100%;
   }
 }
+
+/* ============================= */
+/* ORDEM FUNCIONAMENTO - MOBILE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  #how .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Imagem principal */
+  .how-main-img {
+    order: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Texto */
+  .how-text {
+    order: 2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Imagem tutorial */
+  .how-tutorial-img {
+    order: 3;
+  }
+}
