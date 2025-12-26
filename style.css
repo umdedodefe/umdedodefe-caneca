@@ -341,24 +341,34 @@ footer a:hover { text-decoration: underline; }
 /* ============================= */
 
 @media (max-width: 768px) {
+
+  /* Remove o layout em colunas do Bootstrap */
   #how .row {
     display: flex;
     flex-direction: column;
   }
 
-  /* Imagem principal */
+  #how .how-images,
+  #how .how-text {
+    width: 100%;
+  }
+
+  /* Força os elementos a participarem do mesmo fluxo */
+  #how .how-images {
+    display: contents;
+  }
+
+  /* Ordem correta */
   .how-main-img {
     order: 1;
     margin-bottom: 1.5rem;
   }
 
-  /* Texto */
   .how-text {
     order: 2;
     margin-bottom: 1.5rem;
   }
 
-  /* Imagem tutorial */
   .how-tutorial-img {
     order: 3;
   }
