@@ -278,4 +278,49 @@ footer a:hover { text-decoration: underline; }
   justify-content: space-between;
 }
 
+/* ============================= */
+/* SEÇÃO FUNCIONAMENTO - TUTORIAL */
+/* ============================= */
+
+.how-section {
+  background-color: #4D3821;
+  padding: 5rem 0;
+  color: #fff;
+}
+
+.how-image {
+  width: 100%;
+  max-width: 520px;
+  display: block;
+  margin: 0 auto;
+}
+
+.how-text h2 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.how-text p {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  max-width: 480px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .how-section {
+    text-align: center;
+    padding: 3.5rem 1rem;
+  }
+
+  .how-text p {
+    margin: 0 auto;
+  }
+
+  .how-image {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
 
